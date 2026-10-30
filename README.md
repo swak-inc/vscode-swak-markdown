@@ -172,9 +172,9 @@ Editing runs locally. The extension does not send document content to a service 
 
 編集処理はローカルで動作します。文書本文の外部送信や利用状況の収集は行いません。文書に外部画像が含まれる場合は、そのURLへアクセスします。
 
-For bugs and feature requests, use [GitHub Issues](https://github.com/swak-inc/swak-vscode-markdown/issues). Include **Swak Markdown**, the extension and editor versions, reproduction steps, and a small sample with private information removed. See [Support](SUPPORT.md) and [Changelog](CHANGELOG.md).
+For bugs and feature requests, use [GitHub Issues](https://github.com/swak-inc/vscode-swak-markdown/issues). Include **Swak Markdown**, the extension and editor versions, reproduction steps, and a small sample with private information removed. See [Support](SUPPORT.md) and [Changelog](CHANGELOG.md).
 
-不具合や要望は[GitHub Issues](https://github.com/swak-inc/swak-vscode-markdown/issues)へ。**Swak Markdown**と明記し、拡張・エディターのバージョン、再現手順、非公開情報を除いた最小サンプルを添えてください。[サポート](SUPPORT.md)・[変更履歴](CHANGELOG.md)。
+不具合や要望は[GitHub Issues](https://github.com/swak-inc/vscode-swak-markdown/issues)へ。**Swak Markdown**と明記し、拡張・エディターのバージョン、再現手順、非公開情報を除いた最小サンプルを添えてください。[サポート](SUPPORT.md)・[変更履歴](CHANGELOG.md)。
 
 ## License & Author / ライセンス・開発元
 

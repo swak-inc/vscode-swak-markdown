@@ -66,9 +66,9 @@ The script renders the public sample Markdown using the actual webview assets in
 
 ## Packaging / 配布物
 
-The extension is packaged from this repository's root. Its repository metadata resolves README and image links to `swak-inc/swak-vscode-markdown`. Push reviewed changes before uploading the VSIX to Marketplace so those URLs resolve.
+The extension is packaged from this repository's root. Its repository metadata resolves README and image links to `swak-inc/vscode-swak-markdown`. Push reviewed changes before uploading the VSIX to Marketplace so those URLs resolve.
 
-このリポジトリのルートから拡張をパッケージ化します。READMEと画像のリンクは、リポジトリ情報に基づいて `swak-inc/swak-vscode-markdown` を参照します。MarketplaceへVSIXをアップロードする前に、確認済みの変更をGitHubへ反映します。
+このリポジトリのルートから拡張をパッケージ化します。READMEと画像のリンクは、リポジトリ情報に基づいて `swak-inc/vscode-swak-markdown` を参照します。MarketplaceへVSIXをアップロードする前に、確認済みの変更をGitHubへ反映します。
 
 Generated bundles and VSIX files are ignored by Git. Source, tests, maintenance scripts, and the upstream snapshot are excluded from the VSIX. Compiled theme styles and required license notices remain in the distribution.
 

@@ -6,9 +6,9 @@
   "publisher": "swak-inc",
   "license": "MIT",
   "icon": "media/marketplace/icon.png",
-  "homepage": "https://github.com/swak-inc/swak-vscode-markdown",
+  "homepage": "https://github.com/swak-inc/vscode-swak-markdown",
   "bugs": {
-    "url": "https://github.com/swak-inc/swak-vscode-markdown/issues"
+    "url": "https://github.com/swak-inc/vscode-swak-markdown/issues"
   },
   "keywords": ["markdown", "live preview", "wysiwyg", "outline", "callout", "obsidian", "swak"],
   "galleryBanner": { "color": "#0B3D63", "theme": "dark" },
@@ -21,7 +21,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/swak-inc/swak-vscode-markdown.git"
+    "url": "https://github.com/swak-inc/vscode-swak-markdown.git"
   },
   "main": "./dist/extension.cjs",
   "activationEvents": [],

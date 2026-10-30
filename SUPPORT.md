@@ -1,8 +1,8 @@
 # Support / サポート
 
-Report bugs and feature requests for Swak Markdown through [GitHub Issues](https://github.com/swak-inc/swak-vscode-markdown/issues).
+Report bugs and feature requests for Swak Markdown through [GitHub Issues](https://github.com/swak-inc/vscode-swak-markdown/issues).
 
-Swak Markdownの不具合・要望は [GitHub Issues](https://github.com/swak-inc/swak-vscode-markdown/issues) へお願いします。
+Swak Markdownの不具合・要望は [GitHub Issues](https://github.com/swak-inc/vscode-swak-markdown/issues) へお願いします。
 
 Include the following information. / 次の情報を添えてください。
 
