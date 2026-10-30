@@ -16,7 +16,7 @@ function registerLiveEditor(context, vscode) {
     async resolveCustomTextEditor(document, panel) {
       const root = context.extensionUri;
       const directory = vscode.Uri.joinPath(document.uri, '..');
-      panel.webview.options = { enableScripts: true, localResourceRoots: [root, directory] };
+      panel.webview.options = { enableScripts: true, enableForms: false, localResourceRoots: [root, directory] };
       panels.set(document.uri.toString(), panel);
       let applying = false;
       let queue = Promise.resolve();
@@ -77,7 +77,7 @@ function registerLiveEditor(context, vscode) {
       const escape = text => text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
       panel.webview.html = `<!doctype html><html lang="ja"><head><meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${panel.webview.cspSource} https: data:; style-src ${panel.webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}'; font-src ${panel.webview.cspSource};">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; form-action 'none'; img-src ${panel.webview.cspSource} https: data:; style-src ${panel.webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}'; font-src ${panel.webview.cspSource};">
         <base href="${escape(panel.webview.asWebviewUri(directory).toString())}/">
         <link rel="stylesheet" href="${uri('dist/live-vendor.css')}">
         <link rel="stylesheet" href="${uri('dist/katex/katex.min.css')}">

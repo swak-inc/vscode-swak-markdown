@@ -1,5 +1,10 @@
 # Changelog / 変更履歴
 
+## 0.3.7
+
+- Disable HTML form submission in the custom editor and clarify external-image requests in the privacy description. / カスタムエディターでHTMLフォームの送信を禁止し、外部画像の通信について明記しました。
+- Use GitHub Issues for support and GitHub private vulnerability reporting for security reports. / サポートはGitHub Issues、脆弱性の報告はGitHubの非公開窓口に統一しました。
+
 ## 0.3.6
 
 - Move the extension to its own repository and pin shared theme assets for standalone builds. / 拡張を専用リポジトリへ分離し、共通テーマの版を固定して単体ビルドに対応しました。

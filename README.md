@@ -168,9 +168,9 @@ Obsidianとは別の編集エンジンです。IDE全体のテーマやソース
 
 ## Privacy & Support / データの扱いとサポート
 
-Editing runs locally. The extension does not send document content to a service or collect usage telemetry. External images in your document are fetched from their URLs.
+Swak Markdown has no document-upload service or usage telemetry. It edits files in the workspace selected in your IDE. External images can make HTTPS requests to their hosts, which can receive the requested URL and connection information such as your IP address. HTML form submission is disabled in Swak's custom editor. The IDE and other extensions have their own data-handling policies.
 
-編集処理はローカルで動作します。文書本文の外部送信や利用状況の収集は行いません。文書に外部画像が含まれる場合は、そのURLへアクセスします。
+Swak Markdownは文書のアップロード機能や利用状況の収集機能を持ちません。IDEで選択したワークスペース内のファイルを編集します。外部画像はHTTPSで取得される場合があり、配信元へ画像URLやIPアドレスなどの接続情報が伝わります。SwakのカスタムエディターではHTMLフォームの送信を禁止しています。IDE本体や他の拡張機能によるデータの扱いは、それぞれの方針に従います。
 
 For bugs and feature requests, use [GitHub Issues](https://github.com/swak-inc/vscode-swak-markdown/issues). Include **Swak Markdown**, the extension and editor versions, reproduction steps, and a small sample with private information removed. See [Support](SUPPORT.md) and [Changelog](CHANGELOG.md).
 
