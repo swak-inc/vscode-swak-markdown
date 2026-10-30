@@ -1,0 +1,132 @@
+{
+  "name": "swak-markdown-preview",
+  "displayName": "Swak Markdown",
+  "description": "Edit Markdown in a styled live preview, switch to reading view, and navigate with a resizable outline. / Markdownを整った表示で編集・閲覧。",
+  "version": "0.3.6",
+  "publisher": "swak-inc",
+  "license": "MIT",
+  "icon": "media/marketplace/icon.png",
+  "homepage": "https://github.com/swak-inc/swak-vscode-markdown",
+  "bugs": {
+    "url": "https://github.com/swak-inc/swak-vscode-markdown/issues"
+  },
+  "keywords": ["markdown", "live preview", "wysiwyg", "outline", "callout", "obsidian", "swak"],
+  "galleryBanner": { "color": "#0B3D63", "theme": "dark" },
+  "pricing": "Free",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swak-inc/swak-vscode-markdown.git"
+  },
+  "main": "./dist/extension.cjs",
+  "activationEvents": [],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "swak.markdown.live",
+        "displayName": "Swak Live Preview",
+        "priority": "option",
+        "selector": [
+          {
+            "filenamePattern": "*.md"
+          },
+          {
+            "filenamePattern": "*.markdown"
+          }
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "swak.openLive",
+        "title": "Swak: ライブプレビューで編集",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "swak.openPreview",
+        "title": "Swak: プレビューで読む",
+        "icon": "$(book)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "swak.openLive",
+          "when": "resourceExtname == .md || resourceExtname == .markdown",
+          "group": "navigation@1"
+        },
+        {
+          "command": "swak.openPreview",
+          "when": "resourceExtname == .md || resourceExtname == .markdown",
+          "group": "navigation@2"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "swak.openLive",
+          "when": "resourceExtname == .md || resourceExtname == .markdown",
+          "group": "navigation@1"
+        },
+        {
+          "command": "swak.openPreview",
+          "when": "resourceExtname == .md || resourceExtname == .markdown",
+          "group": "navigation@2"
+        }
+      ]
+    },
+    "markdown.markdownItPlugins": true,
+    "markdown.previewStyles": [
+      "./dist/theme.css",
+      "./media/preview.css"
+    ]
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/*.test.cjs",
+    "vscode:prepublish": "npm run build",
+    "package": "vsce package --no-dependencies --out dist/swak-markdown-preview.vsix",
+    "sync:theme": "node scripts/sync-theme.cjs",
+    "test:browser": "playwright test",
+    "test:editor": "npm run build && node scripts/test-editor.cjs",
+    "screenshots": "npm run build && node scripts/capture-screenshots.cjs"
+  },
+  "dependencies": {
+    "@vscode/markdown-it-katex": "1.1.2",
+    "dompurify": "3.4.17",
+    "highlight.js": "11.12.0",
+    "katex": "0.19.1",
+    "markdown-it-mark": "4.0.0",
+    "markdown-it-obsidian-callouts": "0.3.5",
+    "markdown-it-task-lists": "2.1.1",
+    "prosemirror-commands": "1.7.2",
+    "prosemirror-example-setup": "1.2.3",
+    "prosemirror-history": "1.5.1",
+    "prosemirror-keymap": "1.2.3",
+    "prosemirror-markdown": "1.13.9",
+    "prosemirror-model": "1.25.12",
+    "prosemirror-state": "1.4.4",
+    "prosemirror-tables": "1.8.5",
+    "prosemirror-view": "1.42.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@vscode/vsce": "4.1.0",
+    "esbuild": "0.28.2",
+    "lucide-static": "1.64.0",
+    "markdown-it": "14.3.3"
+  },
+  "overrides": {
+    "katex": "$katex"
+  }
+}

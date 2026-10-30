@@ -1,0 +1,11 @@
+node_modules/**
+src/**
+scripts/**
+test/**
+package-lock.json
+dist/*.vsix
+dist/icons.json
+.gitignore
+playwright.config.cjs
+test-results/**
+vendor/**

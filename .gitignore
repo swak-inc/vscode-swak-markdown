@@ -1,0 +1,13 @@
+dist/
+test-results/
+node_modules/
+.DS_Store
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+token.json
+tokens.json

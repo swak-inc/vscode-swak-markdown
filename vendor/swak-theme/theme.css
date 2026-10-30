@@ -1,0 +1,983 @@
+/* ==========================================================================
+   Swak Official Theme - Reading & Live Preview
+   ========================================================================== */
+
+/* 0. ファイル名タイトル（ノート最上部のファイル名・タブ・サイドバー）の文字色 */
+.inline-title,
+.markdown-rendered .inline-title,
+.markdown-source-view.mod-cm6 .inline-title,
+.markdown-source-view.mod-cm6 .cm-sizer > .inline-title {
+  color: #0B3D63 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.theme-dark .inline-title,
+.theme-dark .markdown-rendered .inline-title,
+.theme-dark .markdown-source-view.mod-cm6 .inline-title,
+.theme-dark .markdown-source-view.mod-cm6 .cm-sizer > .inline-title {
+  color: #93C5FD !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.workspace-tab-header.is-active .workspace-tab-header-inner-title {
+  color: #0B3D63 !important;
+  font-weight: 600 !important;
+}
+.theme-dark .workspace-tab-header.is-active .workspace-tab-header-inner-title {
+  color: #93C5FD !important;
+}
+
+.nav-file-title.is-active .nav-file-title-content {
+  color: #0B3D63 !important;
+  font-weight: 600 !important;
+}
+.theme-dark .nav-file-title.is-active .nav-file-title-content {
+  color: #93C5FD !important;
+}
+
+/* 1. 大見出しアクセント（H1: ネイビー帯見出し専用） */
+.markdown-rendered h1,
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-1 {
+  background-color: #0B3D63 !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  padding: 6px 14px !important;
+  border-radius: 3px !important;
+  letter-spacing: 0.02em !important;
+  border: none !important;
+  box-shadow: 0 1px 3px rgba(11, 61, 99, 0.15) !important;
+}
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-1 *,
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-1 .cm-header-1 {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-1 .cm-formatting-header {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+/* PDFでは本文のH1と、Obsidianが直下に追加するファイル名タイトルを区別する。 */
+@media print {
+  .print .markdown-rendered h1 {
+    box-shadow: none !important;
+  }
+
+  .print > .markdown-preview-view > h1 {
+    background: none !important;
+    color: #0B3D63 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+}
+
+/* 1.5 中見出しアクセント（H2: ペールアイスブルー帯 + 濃紺文字） */
+.markdown-rendered h2,
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-2 {
+  background-color: #E6EFF7 !important;
+  box-shadow: none !important;
+  color: #0B3D63 !important;
+  font-weight: 700 !important;
+  padding: 5px 12px !important;
+  border: none !important;
+  border-radius: 3px !important;
+  letter-spacing: 0.01em !important;
+}
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-2 *,
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-2 .cm-header-2 {
+  color: #0B3D63 !important;
+  font-weight: 700 !important;
+}
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-2 .cm-formatting-header {
+  color: #8FAEC9 !important;
+}
+
+/* 2. 小見出しアクセント（H3: 存在感のある大型角丸スクエアバッジ + 濃紺文字） */
+body {
+  --h3-color: #0B3D63 !important;
+}
+
+.theme-dark {
+  --h3-color: #93C5FD !important;
+}
+
+.markdown-rendered h3,
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-3 {
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--h3-color) !important;
+  font-weight: 700 !important;
+  padding-left: 0 !important;
+}
+
+/* ビューモード: 直後要素のデフォルト余白を相殺し自然な距離感に */
+.markdown-rendered h3 {
+  padding-bottom: 0 !important;
+  margin-bottom: -10px !important;
+}
+
+/* 表の上余白は0なので、H3直後の表には見出し側で余白を確保する。
+   ノートのブロックラッパーと、READMEなどの直接描画の両方に対応する。 */
+.markdown-rendered h3:has(+ table, + .table-wrapper),
+.markdown-rendered .el-h3:has(+ .el-table) > h3 {
+  margin-bottom: var(--p-spacing) !important;
+}
+
+/* H3アイコン: 文字の上下中央にピッタリ配置される大型角丸スクエア（■） */
+.markdown-rendered h3::before,
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-3::before {
+  content: "" !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin-top: -0.16em !important;
+  width: 0.8em !important;
+  height: 0.8em !important;
+  background-color: #0B3D63 !important;
+  border-radius: 2.5px !important;
+  margin-right: 6px !important;
+}
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-3 *,
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-3 .cm-header-3 {
+  color: var(--h3-color) !important;
+  font-weight: 700 !important;
+}
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-3 .cm-formatting-header {
+  color: #9FBAD3 !important;
+}
+
+/* ダークモードでの小見出しアクセント（H3: 明るいアイスブルー文字 + スカイブルースクエア） */
+.theme-dark .markdown-rendered h3::before,
+.theme-dark .markdown-source-view.mod-cm6 .cm-line.HyperMD-header-3::before {
+  background-color: #60A5FA !important;
+}
+.theme-dark .markdown-source-view.mod-cm6 .cm-line.HyperMD-header-3 .cm-formatting-header {
+  color: #64748B !important;
+}
+
+/* 3. テーブルアクセント（ヘッダー: ペールアイスブルー + 濃紺文字、外枠 & 内枠） */
+.markdown-rendered .table-wrapper,
+.markdown-source-view.mod-cm6 .cm-embed-block.cm-table-widget {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.markdown-rendered table,
+.markdown-source-view.mod-cm6 table {
+  width: 100% !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  border-collapse: collapse !important;
+  border: 2px solid #9FBAD3 !important;
+  border-radius: 4px !important;
+}
+/* テーブルセル余白（エディタコンポーネントを壊さない安全で美しい標準スタイル） */
+.markdown-rendered table th,
+.markdown-rendered table td,
+.markdown-source-view.mod-cm6 table th,
+.markdown-source-view.mod-cm6 table td {
+  border: 1px solid #C5D3E0 !important;
+  padding: 8px 12px !important;
+}
+.markdown-rendered table th,
+.markdown-source-view.mod-cm6 table th {
+  background-color: #E6EFF7 !important;
+  color: #0B3D63 !important;
+  font-weight: 700 !important;
+}
+
+/* 先頭列は短いラベルが収まる幅を確保し、長い文章は通常どおり折り返す */
+.markdown-rendered table tr > :is(th, td):first-child,
+.markdown-source-view.mod-cm6 table tr > :is(th, td):first-child {
+  min-width: calc(5em + 24px);
+}
+
+/* 外枠（上・下・左・右）の確実な表示保証 */
+.markdown-rendered table th:first-child,
+.markdown-rendered table td:first-child,
+.markdown-rendered table tr > *:first-child,
+.markdown-source-view.mod-cm6 table th:first-child,
+.markdown-source-view.mod-cm6 table td:first-child,
+.markdown-source-view.mod-cm6 table tr > *:first-child {
+  border-left: 2px solid #9FBAD3 !important;
+}
+.markdown-rendered table th:last-child,
+.markdown-rendered table td:last-child,
+.markdown-rendered table tr > *:last-child,
+.markdown-source-view.mod-cm6 table th:last-child,
+.markdown-source-view.mod-cm6 table td:last-child,
+.markdown-source-view.mod-cm6 table tr > *:last-child {
+  border-right: 2px solid #9FBAD3 !important;
+}
+.markdown-rendered table thead tr:first-child th,
+.markdown-rendered table thead tr:first-child td,
+.markdown-rendered table tr:first-child th,
+.markdown-rendered table tr:first-child td,
+.markdown-source-view.mod-cm6 table thead tr:first-child th,
+.markdown-source-view.mod-cm6 table tr:first-child th {
+  border-top: 2px solid #9FBAD3 !important;
+}
+.markdown-rendered table tbody tr:last-child td,
+.markdown-rendered table tbody tr:last-child th,
+.markdown-rendered table tr:last-child td,
+.markdown-source-view.mod-cm6 table tbody tr:last-child td,
+.markdown-source-view.mod-cm6 table tr:last-child td {
+  border-bottom: 2px solid #9FBAD3 !important;
+}
+
+/* 4. コールアウト（四辺均一の枠線 ＋ カラーバリエーション） */
+
+/* 【基本・青系（デフォルト）】：Note, Info, Abstract, Todo, Example 等 */
+.callout {
+  --callout-color: #1D4ED8 !important;
+  border-left: none !important;
+  border: 1px solid #BFDBFE !important;
+  border-radius: 6px !important;
+  background-color: #EFF6FF !important;
+}
+
+/* コールアウトの用途を表すLucideアイコン */
+/*
+ * Lucide square-text: https://lucide.dev/icons/square-text
+ * 名前が未収録のObsidianでも同じ形を表示するため、公式SVGを埋め込む。
+ * Obsidianが外側のfill属性を書き換えるため、線画はg要素で指定する。
+ * ISC License — Copyright (c) 2026 Lucide Icons and Contributors
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+.callout[data-callout="abstract"],
+.callout[data-callout="summary"],
+.callout[data-callout="tldr"] {
+  --callout-icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g fill="none"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 8h8"/><path d="M7 12h10"/><path d="M7 16h6"/></g></svg>';
+}
+
+.callout[data-callout="todo"] {
+  --callout-icon: lucide-list-todo;
+}
+
+.callout[data-callout="tip"],
+.callout[data-callout="hint"] {
+  --callout-icon: lucide-lightbulb;
+}
+
+.callout[data-callout="success"],
+.callout[data-callout="check"],
+.callout[data-callout="done"] {
+  --callout-icon: lucide-circle-check;
+}
+
+.callout[data-callout="failure"],
+.callout[data-callout="fail"],
+.callout[data-callout="missing"] {
+  --callout-icon: lucide-circle-x;
+}
+
+.callout[data-callout="danger"],
+.callout[data-callout="error"] {
+  --callout-icon: lucide-circle-alert;
+}
+
+.callout > .callout-title {
+  color: #1D4ED8 !important;
+  stroke: currentColor !important;
+}
+
+/* 見出し内だけで色を継承し、ネスト先のコールアウトには伝播させない。 */
+.callout > .callout-title :is(.callout-title-inner, .callout-icon, .svg-icon, svg) {
+  color: inherit !important;
+  stroke: currentColor !important;
+}
+
+/* 1. Danger / Bug / Failure（赤系） */
+.callout[data-callout="danger"],
+.callout[data-callout="bug"],
+.callout[data-callout="failure"],
+.callout[data-callout="error"],
+.callout[data-callout="fail"],
+.callout[data-callout="missing"] {
+  --callout-color: #DC2626 !important;
+  border: 1px solid #FECACA !important;
+  background-color: #FEF2F2 !important;
+}
+.callout[data-callout="danger"] > .callout-title,
+.callout[data-callout="bug"] > .callout-title,
+.callout[data-callout="failure"] > .callout-title,
+.callout[data-callout="error"] > .callout-title,
+.callout[data-callout="fail"] > .callout-title,
+.callout[data-callout="missing"] > .callout-title {
+  color: #DC2626 !important;
+  stroke: currentColor !important;
+}
+
+/* 2. Warning / Caution / Question / FAQ（統一アンバーイエロー系） */
+.callout[data-callout="warning"],
+.callout[data-callout="caution"],
+.callout[data-callout="attention"],
+.callout[data-callout="question"],
+.callout[data-callout="faq"],
+.callout[data-callout="help"] {
+  --callout-color: #D97706 !important;
+  border: 1px solid #FDE68A !important;
+  background-color: #FFFBEB !important;
+}
+.callout[data-callout="warning"] > .callout-title,
+.callout[data-callout="caution"] > .callout-title,
+.callout[data-callout="attention"] > .callout-title,
+.callout[data-callout="question"] > .callout-title,
+.callout[data-callout="faq"] > .callout-title,
+.callout[data-callout="help"] > .callout-title {
+  color: #D97706 !important;
+  stroke: currentColor !important;
+}
+
+/* 3. Tip / Success（緑系） */
+.callout[data-callout="tip"],
+.callout[data-callout="hint"],
+.callout[data-callout="success"],
+.callout[data-callout="check"],
+.callout[data-callout="done"] {
+  --callout-color: #16A34A !important;
+  border: 1px solid #BBF7D0 !important;
+  background-color: #F0FDF4 !important;
+}
+.callout[data-callout="tip"] > .callout-title,
+.callout[data-callout="hint"] > .callout-title,
+.callout[data-callout="success"] > .callout-title,
+.callout[data-callout="check"] > .callout-title,
+.callout[data-callout="done"] > .callout-title {
+  color: #16A34A !important;
+  stroke: currentColor !important;
+}
+
+/* 4. Quote / Cite（グレー系） */
+.callout[data-callout="quote"],
+.callout[data-callout="cite"] {
+  --callout-color: #64748B !important;
+  border: 1px solid #E2E8F0 !important;
+  background-color: #F8FAFC !important;
+}
+.callout[data-callout="quote"] > .callout-title,
+.callout[data-callout="cite"] > .callout-title {
+  color: #64748B !important;
+  stroke: currentColor !important;
+}
+
+/* 【ダークモード対応】 */
+.theme-dark .callout {
+  --callout-color: #93C5FD !important;
+  border: 1px solid #2563EB !important;
+  background-color: rgba(30, 58, 138, 0.2) !important;
+}
+.theme-dark .callout > .callout-title {
+  color: #93C5FD !important;
+  stroke: currentColor !important;
+}
+
+.theme-dark .callout[data-callout="danger"],
+.theme-dark .callout[data-callout="bug"],
+.theme-dark .callout[data-callout="failure"],
+.theme-dark .callout[data-callout="error"],
+.theme-dark .callout[data-callout="fail"],
+.theme-dark .callout[data-callout="missing"] {
+  --callout-color: #FCA5A5 !important;
+  border: 1px solid #EF4444 !important;
+  background-color: rgba(127, 29, 29, 0.2) !important;
+}
+.theme-dark .callout[data-callout="danger"] > .callout-title,
+.theme-dark .callout[data-callout="bug"] > .callout-title,
+.theme-dark .callout[data-callout="failure"] > .callout-title,
+.theme-dark .callout[data-callout="error"] > .callout-title,
+.theme-dark .callout[data-callout="fail"] > .callout-title,
+.theme-dark .callout[data-callout="missing"] > .callout-title {
+  color: #FCA5A5 !important;
+  stroke: currentColor !important;
+}
+
+.theme-dark .callout[data-callout="warning"],
+.theme-dark .callout[data-callout="caution"],
+.theme-dark .callout[data-callout="attention"],
+.theme-dark .callout[data-callout="question"],
+.theme-dark .callout[data-callout="faq"],
+.theme-dark .callout[data-callout="help"] {
+  --callout-color: #FCD34D !important;
+  border: 1px solid #F59E0B !important;
+  background-color: rgba(180, 83, 9, 0.2) !important;
+}
+.theme-dark .callout[data-callout="warning"] > .callout-title,
+.theme-dark .callout[data-callout="caution"] > .callout-title,
+.theme-dark .callout[data-callout="attention"] > .callout-title,
+.theme-dark .callout[data-callout="question"] > .callout-title,
+.theme-dark .callout[data-callout="faq"] > .callout-title,
+.theme-dark .callout[data-callout="help"] > .callout-title {
+  color: #FCD34D !important;
+  stroke: currentColor !important;
+}
+
+.theme-dark .callout[data-callout="tip"],
+.theme-dark .callout[data-callout="hint"],
+.theme-dark .callout[data-callout="success"],
+.theme-dark .callout[data-callout="check"],
+.theme-dark .callout[data-callout="done"] {
+  --callout-color: #86EFAC !important;
+  border: 1px solid #22C55E !important;
+  background-color: rgba(21, 128, 61, 0.2) !important;
+}
+.theme-dark .callout[data-callout="tip"] > .callout-title,
+.theme-dark .callout[data-callout="hint"] > .callout-title,
+.theme-dark .callout[data-callout="success"] > .callout-title,
+.theme-dark .callout[data-callout="check"] > .callout-title,
+.theme-dark .callout[data-callout="done"] > .callout-title {
+  color: #86EFAC !important;
+  stroke: currentColor !important;
+}
+
+.theme-dark .callout[data-callout="quote"],
+.theme-dark .callout[data-callout="cite"] {
+  --callout-color: #94A3B8 !important;
+  border: 1px solid #475569 !important;
+  background-color: rgba(30, 41, 59, 0.3) !important;
+}
+.theme-dark .callout[data-callout="quote"] > .callout-title,
+.theme-dark .callout[data-callout="cite"] > .callout-title {
+  color: #94A3B8 !important;
+  stroke: currentColor !important;
+}
+
+
+
+/* 5. リンク色（基本の青系・エディットモード紫色解消 & ライト/ダーク対応） */
+body {
+  --link-color: #2563EB !important;
+  --link-color-hover: #1D4ED8 !important;
+  --link-external-color: #2563EB !important;
+  --link-external-color-hover: #1D4ED8 !important;
+  --link-unresolved-color: #2563EB !important;
+  --link-unresolved-opacity: 0.8 !important;
+}
+.theme-dark {
+  --link-color: #60A5FA !important;
+  --link-color-hover: #93C5FD !important;
+  --link-external-color: #60A5FA !important;
+  --link-external-color-hover: #93C5FD !important;
+  --link-unresolved-color: #60A5FA !important;
+}
+
+.markdown-rendered a,
+.markdown-rendered .internal-link,
+.markdown-source-view.mod-cm6 .cm-link,
+.markdown-source-view.mod-cm6 .cm-hmd-internal-link,
+.markdown-source-view.mod-cm6 .cm-url,
+.markdown-source-view.mod-cm6 .cm-underline,
+.markdown-source-view.mod-cm6 a {
+  color: #2563EB !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+}
+.markdown-rendered a:hover,
+.markdown-rendered .internal-link:hover,
+.markdown-source-view.mod-cm6 .cm-link:hover,
+.markdown-source-view.mod-cm6 .cm-hmd-internal-link:hover,
+.markdown-source-view.mod-cm6 a:hover {
+  color: #1D4ED8 !important;
+}
+
+.theme-dark .markdown-rendered a,
+.theme-dark .markdown-rendered .internal-link,
+.theme-dark .markdown-source-view.mod-cm6 .cm-link,
+.theme-dark .markdown-source-view.mod-cm6 .cm-hmd-internal-link,
+.theme-dark .markdown-source-view.mod-cm6 .cm-url,
+.theme-dark .markdown-source-view.mod-cm6 .cm-underline,
+.theme-dark .markdown-source-view.mod-cm6 a {
+  color: #60A5FA !important;
+}
+.theme-dark .markdown-rendered a:hover,
+.theme-dark .markdown-rendered .internal-link:hover,
+.theme-dark .markdown-source-view.mod-cm6 .cm-link:hover,
+.theme-dark .markdown-source-view.mod-cm6 .cm-hmd-internal-link:hover,
+.theme-dark .markdown-source-view.mod-cm6 a:hover {
+  color: #93C5FD !important;
+}
+
+/* 6. タスクチェックボックスアクセント（エメラルドグリーン系） */
+body {
+  --checkbox-color: #16A34A !important;
+  --checkbox-color-hover: #15803D !important;
+  --checkbox-border-color: #94A3B8 !important;
+  --checkbox-border-color-hover: #16A34A !important;
+  --checkbox-marker-color: #FFFFFF !important;
+}
+
+.task-list-item-checkbox {
+  accent-color: #16A34A !important;
+}
+
+.task-list-item-checkbox:checked,
+input[type="checkbox"]:checked {
+  background-color: #16A34A !important;
+  border-color: #16A34A !important;
+  --checkbox-marker-color: #FFFFFF !important;
+}
+
+.theme-dark {
+  --checkbox-color: #22C55E !important;
+  --checkbox-color-hover: #16A34A !important;
+}
+
+.theme-dark .task-list-item-checkbox {
+  accent-color: #22C55E !important;
+}
+
+.theme-dark .task-list-item-checkbox:checked,
+.theme-dark input[type="checkbox"]:checked {
+  background-color: #22C55E !important;
+  border-color: #22C55E !important;
+}
+
+/* 6.5 リスト記号は本文色に統一し、ガイド線・点・本文の間隔を揃える */
+body {
+  --list-marker-color: var(--text-normal) !important;
+  --list-marker-color-hover: var(--text-normal) !important;
+  --list-marker-color-collapsed: var(--text-normal) !important;
+  --swak-list-gap: 1em;
+  --list-indent: calc(var(--swak-list-gap) + var(--indentation-guide-width)) !important;
+  --indentation-guide-reading-indent: calc(-1 * var(--swak-list-gap));
+}
+
+/* 箇条書きと番号リストを組み合わせたネストも同じ幅に揃える */
+.markdown-rendered :is(ul, ol) :is(ul, ol) > li {
+  margin-inline-start: var(--list-indent);
+}
+
+.markdown-rendered .list-bullet {
+  margin-inline-start: calc(-1 * var(--swak-list-gap));
+}
+
+/* 7. 赤太字アクセント（***赤太字***: クリムゾンレッド・斜体解除） */
+.markdown-rendered strong em,
+.markdown-rendered em strong,
+.markdown-source-view.mod-cm6 .cm-strong.cm-em,
+.markdown-source-view.mod-cm6 .cm-strong .cm-em,
+.markdown-source-view.mod-cm6 .cm-em .cm-strong {
+  color: #DC2626 !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+}
+
+.theme-dark .markdown-rendered strong em,
+.theme-dark .markdown-rendered em strong,
+.theme-dark .markdown-source-view.mod-cm6 .cm-strong.cm-em,
+.theme-dark .markdown-source-view.mod-cm6 .cm-strong .cm-em,
+.theme-dark .markdown-source-view.mod-cm6 .cm-em .cm-strong {
+  color: #F87171 !important;
+}
+
+/* エディットモード時のアスタリスク記号色 */
+.markdown-source-view.mod-cm6 .cm-formatting-strong.cm-formatting-em,
+.markdown-source-view.mod-cm6 .cm-formatting-em.cm-formatting-strong {
+  color: #94A3B8 !important;
+}
+
+/* 8. コードブロック＆インラインコード視認性向上（ライト＆ダーク完全同期） */
+
+/* 【ライトモード】：洗練されたスレートライト */
+.theme-light {
+  --code-background: #F1F5F9 !important;
+  --code-normal: #0F172A !important;
+}
+
+.theme-light .markdown-rendered :not(pre) > code,
+.theme-light .markdown-source-view.mod-cm6 .cm-inline-code {
+  background-color: #F1F5F9 !important;
+  border: 1px solid #CBD5E1 !important;
+  border-radius: 4px !important;
+  padding: 1.5px 5px !important;
+  color: #0F172A !important;
+  font-size: 0.88em !important;
+}
+
+.theme-light .markdown-rendered pre,
+.theme-light .markdown-source-view.mod-cm6 .HyperMD-codeblock {
+  background-color: #F1F5F9 !important;
+}
+
+.theme-light .markdown-rendered pre {
+  border: 1px solid #CBD5E1 !important;
+  border-radius: 6px !important;
+}
+
+/* 【ダークモード】：深みのあるスレートダーク（チップスタイル＆外枠を完全同期） */
+.theme-dark {
+  --code-background: #1E293B !important;
+  --code-normal: #E2E8F0 !important;
+}
+
+.theme-dark .markdown-rendered :not(pre) > code,
+.theme-dark .markdown-source-view.mod-cm6 .cm-inline-code {
+  background-color: #1E293B !important;
+  border: 1px solid #334155 !important;
+  border-radius: 4px !important;
+  padding: 1.5px 5px !important;
+  color: #E2E8F0 !important;
+  font-size: 0.88em !important;
+}
+
+.theme-dark .markdown-rendered pre,
+.theme-dark .markdown-source-view.mod-cm6 .HyperMD-codeblock {
+  background-color: #1E293B !important;
+}
+
+.theme-dark .markdown-rendered pre {
+  border: 1px solid #334155 !important;
+  border-radius: 6px !important;
+}
+
+/* 9. ダイアグラム・図解（Mermaid）はみ出しOK全体図表示（等倍・Obsidian標準カラー） */
+.mermaid,
+.block-language-mermaid {
+  display: block !important;
+  width: max-content !important;
+  max-width: none !important;
+  overflow: visible !important;
+  text-align: left;
+  padding: 0.5em 0 !important;
+}
+
+.mermaid svg,
+.block-language-mermaid svg {
+  max-width: none !important;
+  overflow: visible !important;
+  height: auto !important;
+}
+
+/* 10. 数式の外枠だけ文字欠けを防ぐ。フォント・字送り・行高はMathJaxに任せる */
+.math,
+.math-inline,
+.math-block,
+mjx-container {
+  overflow: visible !important;
+}
+
+/* 11. HTML詳細折りたたみ（Details / Summary）アコーディオンカード化 */
+details {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 6px !important;
+  background-color: #F8FAFC !important;
+  margin: 1em 0 !important;
+  padding: 0.6em 1em !important;
+  transition: all 0.2s ease !important;
+}
+
+details[open] {
+  background-color: #F8FAFC !important;
+  border-color: #CBD5E1 !important;
+}
+
+details summary {
+  font-weight: 600 !important;
+  color: #1E293B !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  padding: 0.2em 0 !important;
+  outline: none !important;
+  transition: color 0.15s ease !important;
+}
+
+details summary:hover {
+  color: #2563EB !important;
+}
+
+details > *:not(summary) {
+  margin-top: 0.75em !important;
+}
+
+/* ダークモード */
+.theme-dark details {
+  border: 1px solid #334155 !important;
+  background-color: #1E293B !important;
+}
+.theme-dark details[open] {
+  border-color: #475569 !important;
+}
+.theme-dark details summary {
+  color: #F1F5F9 !important;
+}
+.theme-dark details summary:hover {
+  color: #60A5FA !important;
+}
+
+/* 12. 引用線はグレーに統一し、親の線・子の線・本文の空きを揃える */
+body {
+  --blockquote-border-color: var(--text-muted) !important;
+  --swak-quote-gap: 12px;
+  --swak-quote-step: calc(var(--swak-quote-gap) + var(--blockquote-border-thickness));
+}
+
+.markdown-rendered blockquote {
+  padding-inline-start: var(--swak-quote-gap);
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote:not(.HyperMD-callout) > .cm-formatting-quote,
+.markdown-source-view.mod-cm6.is-live-preview .cm-blockquote-border {
+  display: inline-block;
+  inline-size: var(--swak-quote-step);
+  text-indent: 0;
+}
+
+/* ネストの線に置き換えられた > の後ろの空白は、上の幅に含める */
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote:not(.HyperMD-callout) > .cm-blockquote-border + .cm-widgetBuffer + .cm-formatting-quote {
+  inline-size: 0;
+  font-size: 0;
+}
+
+/* 12.5 ノート埋め込みの縦線は各モードのH3文字色に揃える */
+.markdown-embed {
+  border-inline-start-color: var(--h3-color) !important;
+}
+
+/* ==========================================================================
+   13. ライブプレビューを閲覧モードの余白に合わせる
+   空行と編集用ウィジェットの余白を補正し、Markdown本文は変更しない
+   ========================================================================== */
+
+/* 本文は通常の行間、見出し・コード・表は各要素の行間を使う */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-line:not(.HyperMD-header, .HyperMD-codeblock) {
+  line-height: var(--line-height-normal) !important;
+}
+
+/* 閲覧時の段落間隔に合わせる。空行は残し、クリック・入力できる高さを確保する */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-line:not(.HyperMD-codeblock):has(> br:only-child) {
+  line-height: var(--p-spacing) !important;
+}
+
+/* 水平線は閲覧側の上下2remを再現し、隣接する空行の高さを差し引く */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-line.hr {
+  --swak-hr-space-before: 2rem;
+  --swak-hr-space-after: 2rem;
+  padding-block: var(--swak-hr-space-before) var(--swak-hr-space-after);
+  line-height: var(--hr-thickness) !important;
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-line:has(> br:only-child) + .hr {
+  --swak-hr-space-before: max(0px, calc(2rem - var(--p-spacing)));
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .hr:has(+ .cm-line > br:only-child) {
+  --swak-hr-space-after: max(0px, calc(2rem - var(--p-spacing)));
+}
+
+/* CodeMirrorの行には上下marginを付けず、余白を計測可能な行ボックス内に収める */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header {
+  margin-block: 0 !important;
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header:not(.HyperMD-header-1, .HyperMD-header-2) {
+  padding-block: 0 !important;
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-line:has(> br:only-child):has(+ .HyperMD-header) {
+  padding-block-start: max(0px, calc(var(--heading-spacing) - var(--p-spacing)));
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-line:has(> br:only-child) + .cm-line:has(> br:only-child):has(+ .HyperMD-header) {
+  padding-block-start: max(0px, calc(var(--heading-spacing) - 2 * var(--p-spacing)));
+}
+
+/* 文頭も入力可能な空行の高さを保ち、選択状態によって高さを変えない */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-line:first-child:has(> br:only-child):has(+ .HyperMD-header) {
+  padding-block-start: 0;
+}
+
+/* 表・数式の後は通常の見出し前余白を使い、ほかの埋め込みの余白とは重ねない */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > :is(.HyperMD-header, .hr, .cm-embed-block:not(.cm-table-widget, .math-block)) + .cm-line:has(> br:only-child):has(+ .HyperMD-header) {
+  padding-block-start: 0;
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header + .cm-line:not(.HyperMD-header):not(:has(> br:only-child)) {
+  padding-block-start: var(--p-spacing);
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header + .HyperMD-list-line {
+  padding-block-start: calc(var(--p-spacing) + var(--list-spacing)) !important;
+}
+
+/* H3の閲覧側の下余白 -10px と、後続段落の余白を合算する */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .cm-line:not(.HyperMD-header):not(:has(> br:only-child)) {
+  padding-block-start: max(0px, calc(var(--p-spacing) - 10px));
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .HyperMD-list-line {
+  padding-block-start: max(0px, calc(var(--p-spacing) - 10px + var(--list-spacing))) !important;
+}
+
+/* 折りたたみ枠自身の余白と、見出し・空行の余白を重複させない */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .cm-html-embed > details {
+  margin-block-start: max(0px, calc(1em - 10px)) !important;
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-html-embed:has(+ .cm-line > br:only-child) > details {
+  margin-block-end: 0 !important;
+}
+
+/* 引用の本文から内側の引用に入る箇所は、閲覧側の段落間隔を加える */
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote-1 + .HyperMD-quote:not(.HyperMD-quote-1) {
+  --swak-quote-top-gap: var(--p-spacing);
+  padding-block-start: var(--swak-quote-top-gap);
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-blockquote-border::before {
+  top: var(--swak-quote-top-gap, 0px);
+}
+
+/* 表の操作ハンドルは外側に表示し、本文との余白には含めない */
+.markdown-source-view.mod-cm6.is-live-preview .cm-embed-block.cm-table-widget {
+  padding-block: 0;
+  overflow: visible;
+  contain: none !important;
+}
+
+/* セル余白を内側ラッパーに集約し、二重余白と不要な折り返しを解消する */
+.markdown-source-view.mod-cm6.is-live-preview .cm-table-widget :is(th, td) {
+  padding: 0 !important;
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-table-widget .table-cell-wrapper {
+  padding: 8px 12px;
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-table-widget .table-wrapper {
+  width: 100%;
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-table-widget .cm-line {
+  line-height: var(--table-line-height) !important;
+}
+
+/* 横長のMermaid図も、閲覧側と同じく本文幅の外まで表示する */
+.markdown-source-view.mod-cm6.is-live-preview .cm-embed-block:has(> .mermaid) {
+  contain: none !important;
+  overflow: visible !important;
+}
+
+/* 箇条書きの開始位置を閲覧側と同じ本文フォントの3chに合わせる */
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line:not(.HyperMD-task-line) > .cm-formatting-list-ul {
+  box-sizing: border-box;
+  display: inline-block;
+  font-variant-numeric: normal;
+  inline-size: 3ch;
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-formatting-list-ul .list-bullet {
+  inline-size: 0;
+  margin-inline-start: calc(3ch - var(--swak-list-gap) - var(--list-padding-inline-start));
+}
+
+/* 番号の桁数に関係なく、閲覧側のリスト本文と同じ3chの位置に揃える */
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line > .cm-formatting-list-ol {
+  box-sizing: border-box;
+  display: inline-block;
+  inline-size: 3ch;
+  padding-inline-start: 0;
+  font-variant-numeric: normal;
+  text-align: end;
+}
+
+/* 閲覧側と同じチェック位置。編集側に残る半角スペース分は右余白から差し引く */
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-task-line > .task-list-label {
+  margin-inline-start: calc(3ch - var(--checkbox-size) * 1.5);
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-task-line > .task-list-label .task-list-item-checkbox {
+  margin-inline-start: 0;
+  margin-inline-end: 0.35em;
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-task-line:has(> .cm-formatting-list-ol) > .task-list-label {
+  margin-inline-start: 0;
+}
+
+/* 閲覧側は番号付きタスクの完了行に取り消し線を付けない */
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-task-line:is([data-task="x"], [data-task="X"]):has(> .cm-formatting-list-ol) {
+  color: var(--text-normal);
+  text-decoration: none;
+}
+
+/* スペース2個・4個・タブの違いではなく、解析済みの階層を基準に字下げする */
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-2,
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-2 + .math-block {
+  --swak-list-level: 1;
+}
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-3,
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-3 + .math-block {
+  --swak-list-level: 2;
+}
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-4,
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-4 + .math-block {
+  --swak-list-level: 3;
+}
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-5,
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-5 + .math-block {
+  --swak-list-level: 4;
+}
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-6,
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-6 + .math-block {
+  --swak-list-level: 5;
+}
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-7,
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-7 + .math-block {
+  --swak-list-level: 6;
+}
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-8,
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line-8 + .math-block {
+  --swak-list-level: 7;
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line:not(.HyperMD-list-line-nobullet) > .cm-hmd-list-indent {
+  inline-size: calc(var(--swak-list-level) * var(--list-indent));
+}
+
+/* リストに続くブロック数式も、その項目の本文幅を基準に中央揃えする */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-list-line + .math-block {
+  padding-inline-start: calc(3ch + var(--swak-list-level, 0) * var(--list-indent));
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line:not(.HyperMD-list-line-nobullet) > .cm-hmd-list-indent::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(3ch - 2 * var(--swak-list-gap));
+  inline-size: inherit;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(var(--list-indent) - var(--indentation-guide-width)),
+    var(--indentation-guide-color) calc(var(--list-indent) - var(--indentation-guide-width)),
+    var(--indentation-guide-color) var(--list-indent)
+  );
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .HyperMD-list-line:not(.HyperMD-list-line-nobullet) > .cm-hmd-list-indent .cm-indent::before {
+  border-inline-end-width: 0;
+}
+
+/* コードブロックの枠線・角丸・上下の内側余白を閲覧側に合わせる */
+.markdown-source-view.mod-cm6.is-live-preview {
+  --code-border-width: 1px;
+  --code-border-color: #CBD5E1;
+  --code-radius: 6px;
+}
+
+.theme-dark .markdown-source-view.mod-cm6.is-live-preview {
+  --code-border-color: #334155;
+}
+
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-codeblock {
+  line-height: calc(var(--font-text-size) * var(--line-height-normal));
+}
