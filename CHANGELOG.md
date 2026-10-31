@@ -1,5 +1,9 @@
 # Changelog / 変更履歴
 
+## Unreleased / 未公開
+
+- Match heading spacing after callouts to paragraphs and tables in live, reading, and built-in previews, while keeping the opening H1 and adjacent headings compact. / ライブ・閲覧・標準プレビューでコールアウト後の見出し余白を本文・テーブル後と統一し、冒頭のH1と見出しが連続する箇所はコンパクトに保ちます。
+
 ## 1.1.0
 
 - Bring the shared Obsidian property card and chapter spacing into a documented release, including compact opening headings and 64px chapter gaps. / Obsidian共通のプロパティ表示と章の余白をまとめた更新です。冒頭の見出しはコンパクトに、章の区切りは64pxに揃えています。

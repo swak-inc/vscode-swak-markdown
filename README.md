@@ -60,7 +60,7 @@ Property labels and values use the same card design as Obsidian. Long descriptio
 
 **English**
 
-The first H1 stays compact even when preceded by text or properties. Later H1 headings following paragraphs or lists use a 64px top gap. Headings after callouts, adjacent headings, and the space below H3 stay compact. Live, reading, and built-in previews share these rules.
+The first H1 stays compact even when preceded by text or properties. Later H1 headings following paragraphs, lists, tables, or callouts use a 64px top gap. H2–H6 after callouts use the same spacing as after paragraphs and tables. Adjacent headings and the space below H3 stay compact. Live, reading, and built-in previews share these rules.
 
 For a PDF with chapter page breaks, open the same Markdown in Obsidian with the Swak theme and use **Export to PDF**. The first body H1 does not force a page break; the second and subsequent body H1 headings start a new page, regardless of what appears before the first H1. The filename title does not count as a body H1. This extension does not provide a PDF export command. See the [Obsidian PDF guide](https://github.com/swak-inc/obsidian-theme-swak#chapter-spacing--pdf-export--章の余白とpdfエクスポート).
 
@@ -68,7 +68,7 @@ See [1.1.0 release notes](CHANGELOG.md).
 
 **日本語**
 
-最初のH1は、その前に文章やプロパティがある場合も通常の間隔にします。本文の段落・リストから2つ目以降のH1へ移る上余白は64pxに揃えています。コールアウト直後、見出しが連続する箇所、H3直後は通常の間隔とし、ライブ・閲覧・標準プレビューで共通の余白にしています。
+最初のH1は、その前に文章やプロパティがある場合も通常の間隔にします。本文の段落・リスト・テーブル・コールアウトから2つ目以降のH1へ移る上余白は64pxに揃えています。コールアウト後のH2〜H6も、本文・テーブル後と同じ余白にします。見出しが連続する箇所とH3直後はコンパクトに保ち、ライブ・閲覧・標準プレビューで共通の余白にしています。
 
 章ごとに改ページしたPDFは、同じMarkdownをSwakテーマのObsidianで開き、「PDFにエクスポート」から出力します。**本文の最初のH1で強制改ページせず、2つ目以降のH1で改ページ**します。最初のH1より前の内容には依存しません。ファイル名タイトルは本文のH1として数えません。この拡張にはPDF出力コマンドはありません。[ObsidianのPDF出力ガイド](https://github.com/swak-inc/obsidian-theme-swak#chapter-spacing--pdf-export--章の余白とpdfエクスポート)を参照してください。
 
