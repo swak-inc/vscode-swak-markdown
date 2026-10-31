@@ -1,5 +1,11 @@
 # Changelog / 変更履歴
 
+## 1.1.0
+
+- Bring the shared Obsidian property card and chapter spacing into a documented release, including compact opening headings and 64px chapter gaps. / Obsidian共通のプロパティ表示と章の余白をまとめた更新です。冒頭の見出しはコンパクトに、章の区切りは64pxに揃えています。
+- Clarify that property values are edited in Source and their original YAML is preserved during body editing. / プロパティはソースから編集し、本文編集では元のYAMLを保持することを明記しました。
+- Refresh light/dark screenshots with shared property and meeting samples, and document the Obsidian PDF export workflow. / 共通のプロパティ・会議資料サンプルでライト／ダーク画像を更新し、ObsidianでのPDF出力手順を案内しました。
+
 ## 1.0.4
 
 - Display YAML frontmatter as a readable property card in live, reading, and built-in previews, using the shared Obsidian design. / YAMLを項目名・値のプロパティ欄として表示し、ライブ・閲覧・標準プレビューをObsidianと同じデザインに揃えました。

@@ -4,7 +4,7 @@ const { createHash } = require('node:crypto');
 
 const themeDirectory = path.resolve(__dirname, '../vendor/swak-theme');
 const themeRepository = 'https://github.com/swak-inc/obsidian-theme-swak';
-const themeFiles = ['theme.css', 'LICENSE', 'ui-sample-en.md', 'ui-sample-ja.md', 'ui-reference.md', 'ui-embed-sample.md', 'screenshot.png'];
+const themeFiles = ['theme.css', 'LICENSE', 'ui-sample-en.md', 'ui-sample-ja.md', 'ui-properties.md', 'ui-meeting.md', 'ui-reference.md', 'ui-embed-sample.md', 'screenshot.png'];
 const digest = data => createHash('sha256').update(data).digest('hex');
 const themeFile = name => {
   if (!themeFiles.includes(name)) throw new Error('対象外のテーマファイル: ' + name);

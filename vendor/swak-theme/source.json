@@ -1,13 +1,15 @@
 {
   "repository": "https://github.com/swak-inc/obsidian-theme-swak",
-  "revision": "d0e6e11f9781c420ca171c5faeb0c628be026f90",
+  "revision": "09e8ead423ad9b55218b69dc39ad678ecfc3f639",
   "files": {
     "theme.css": "4ea5bd83675578e6d925cdee6d07d17038e2a759f6a29b6bbce0a7c41af2a1ae",
     "LICENSE": "4495a425b9bc3cd75395646d1b6b4d37a47e4dba8c828ecaae4b46f02a42dce2",
     "ui-sample-en.md": "c74d52a592c442343017dfed24410990d0d16b160c3f597b9a8411bb91f17d14",
     "ui-sample-ja.md": "54648b1cd26c96ee71a10f589bb252a4b3bc3a6a2bf72c2575328e8f2effbddf",
+    "ui-properties.md": "31e00b4c8982452e802c8e9e3a021b18732b43a309e36b7a8b5d1d20622bb047",
+    "ui-meeting.md": "c475ff572c73af23dd3c2eba22bf0b3c23f0a4d07d73ac07d8e4275d7212d3c7",
     "ui-reference.md": "ca548509caddf498693683d0b0cadd7da3217bfff24d3930116449c6a4a4bd45",
     "ui-embed-sample.md": "532f4f4679f812a076e52474613e7ec0c79bcbfe372af895c926e1e40a089ad1",
-    "screenshot.png": "696d74361260a6716d3eee5746afcfc202a0708e0f2936d76cc0435aea436935"
+    "screenshot.png": "b8335fd92a03a7393029546e6cab2be8222a7478ee9e03e9ff78533d36fc69fa"
   }
 }
