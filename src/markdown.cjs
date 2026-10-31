@@ -1,4 +1,4 @@
-const callouts = require('markdown-it-obsidian-callouts');
+const callouts = require('./callouts.cjs');
 const mark = require('./mark.cjs');
 const taskLists = require('markdown-it-task-lists');
 const icons = require('../dist/icons.json');

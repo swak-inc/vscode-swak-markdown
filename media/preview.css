@@ -3,6 +3,8 @@ body.vscode-body {
   --text-normal: var(--vscode-editor-foreground);
   --text-muted: var(--vscode-descriptionForeground);
   --p-spacing: 1rem;
+  --heading-spacing: calc(var(--p-spacing) * 2.5);
+  --list-spacing: 0.075em;
   --line-height-normal: 1.5;
   --table-line-height: 1.5;
   --blockquote-border-thickness: 2px;
@@ -16,20 +18,19 @@ body.vscode-dark,
 body.vscode-high-contrast { --text-highlight-bg: #665522; }
 .markdown-body { max-width: 900px; margin: 0 auto; }
 .markdown-body :is(h1, h2, h3, h4, h5, h6) {
-  line-height: 1.3;
-  margin-top: 1.5em;
-  margin-bottom: var(--p-spacing);
+  margin-block: var(--p-spacing);
 }
 .markdown-body > :first-child { margin-top: 0; }
-.markdown-body h1 { font-size: 1.8em; }
-/* 本文からH1への余白は共通テーマに合わせ、文頭・見出し直後は保つ。 */
-.markdown-body :is(p, pre, table, .tableWrapper, ul, ol, blockquote:not(.callout)) + h1 {
+/* Obsidian同様、本文→見出しと、見出し→見出しの間隔を分ける。H1は共通テーマの64px。 */
+.markdown-body :is(p, pre, table, .tableWrapper, ul, ol, blockquote:not(.callout)) + :is(h1, h2, h3, h4, h5, h6) {
   margin-top: var(--heading-spacing);
 }
-.markdown-body h2 { font-size: 1.6em; }
-.markdown-body h3 { font-size: 1.2em; }
-.markdown-body h4 { font-size: 1.1em; }
-.markdown-body :is(h5, h6) { font-size: 1em; }
+.markdown-body h1 { font-size: 1.618em; line-height: 1.2; }
+.markdown-body h2 { font-size: 1.462em; line-height: 1.2; }
+.markdown-body h3 { font-size: 1.318em; line-height: 1.3; }
+.markdown-body h4 { font-size: 1.188em; line-height: 1.4; }
+.markdown-body h5 { font-size: 1.076em; line-height: var(--line-height-normal); }
+.markdown-body h6 { font-size: 1em; line-height: var(--line-height-normal); }
 .markdown-body :is(p, ul, ol, blockquote, pre) { margin-block: var(--p-spacing); }
 .markdown-body blockquote {
   margin-inline: 0;
@@ -41,8 +42,8 @@ body.vscode-high-contrast { --text-highlight-bg: #665522; }
 .markdown-body blockquote > :first-child { margin-top: 0; }
 .markdown-body blockquote > :last-child { margin-bottom: 0; }
 .markdown-body :is(ul, ol) { padding-inline-start: 1.5em; }
-.markdown-body :is(ul, ol) :is(ul, ol) { margin-block: 0.3em; padding-inline-start: 0.5em; }
-.markdown-body li { margin-block: 0.25em; }
+.markdown-body :is(ul, ol) :is(ul, ol) { margin-block: 0; padding-inline-start: 0.5em; }
+.markdown-body li { margin-block: 0; padding-block: var(--list-spacing); }
 .markdown-body li::marker { color: var(--text-normal); }
 .markdown-body li > p { margin-block: 0.4em; }
 .markdown-body ul > .task-list-item { list-style-type: none; }
@@ -74,19 +75,19 @@ body.vscode-high-contrast { --text-highlight-bg: #665522; }
 .markdown-body pre { padding: 1em; overflow: auto; }
 .markdown-body pre code { color: var(--code-normal); }
 .markdown-body mark { background: var(--text-highlight-bg); color: inherit; padding: 0.05em 0; }
-.markdown-body .callout { padding: 12px 16px; margin-block: var(--p-spacing); overflow: hidden; }
+.markdown-body .callout { padding: 12px 12px 12px 24px; margin-block: var(--p-spacing); overflow: hidden; }
+.markdown-body > .callout:first-child { margin-top: 0; }
 .markdown-body .callout-title {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: 4px;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.3;
 }
-.markdown-body .callout-title-icon { display: flex; align-items: center; flex: 0 0 auto; height: 1.5em; }
+.markdown-body .callout-title-icon { display: flex; align-items: center; flex: 0 0 auto; height: 1.3em; }
 .markdown-body .callout-title-icon svg { width: 18px; height: 18px; }
 .markdown-body .callout-title-inner { flex: 1; min-width: 0; }
-.markdown-body .callout-content > :first-child { margin-top: 0.75em; }
-.markdown-body .callout-content > :last-child { margin-bottom: 0; }
+.markdown-body .callout-content { display: flow-root; }
 .markdown-body details.callout > summary { cursor: pointer; list-style: none; }
 .markdown-body details.callout > summary::-webkit-details-marker { display: none; }
 .markdown-body details.callout > summary:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }

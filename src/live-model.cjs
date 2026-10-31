@@ -2,7 +2,7 @@ const MarkdownIt = require('markdown-it');
 const { Schema } = require('prosemirror-model');
 const { schema: baseSchema, MarkdownParser, MarkdownSerializer, defaultMarkdownParser, defaultMarkdownSerializer } = require('prosemirror-markdown');
 const { tableNodes } = require('prosemirror-tables');
-const callouts = require('markdown-it-obsidian-callouts');
+const callouts = require('./callouts.cjs');
 const mark = require('./mark.cjs');
 
 let nodes = baseSchema.spec.nodes.update('list_item', {

@@ -1,5 +1,10 @@
 # Changelog / 変更履歴
 
+## 1.0.2
+
+- Align heading sizes, heading-to-heading gaps, H3 body spacing, and callout layout with Obsidian; keep the opening agenda compact while retaining 64px chapter breaks. / 見出しサイズ・見出し同士とH3本文の間隔・コールアウトの配置をObsidianに揃え、冒頭アジェンダはコンパクトに、章の区切りは64pxに統一しました。
+- Remove the empty title paragraph from callout bodies so lists start directly below the title in live preview. / コールアウトのタイトルに由来する空段落を取り除き、ライブプレビューでもタイトル直後に箇条書きを表示します。
+
 ## 1.0.1
 
 - Match the Obsidian theme's 64px spacing before H1 chapters in the built-in preview, live editor, and reading view. / 標準プレビュー・ライブ編集・閲覧表示で、本文からH1へ移る上余白をObsidianテーマと同じ64pxに揃えました。
