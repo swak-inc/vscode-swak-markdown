@@ -1,5 +1,9 @@
 # Changelog / 変更履歴
 
+## 1.0.1
+
+- Match the Obsidian theme's 64px spacing before H1 chapters in the built-in preview, live editor, and reading view. / 標準プレビュー・ライブ編集・閲覧表示で、本文からH1へ移る上余白をObsidianテーマと同じ64pxに揃えました。
+
 ## 1.0.0
 
 - First stable release of Swak Markdown, with editable live preview, reading view, a collapsible and resizable outline, and light/dark Swak styling. / ライブプレビュー編集・閲覧・開閉と幅調整に対応した目次・ライト／ダークのSwakスタイルを備えた初回正式版です。

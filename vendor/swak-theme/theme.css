@@ -38,6 +38,16 @@
 }
 
 /* 1. 大見出しアクセント（H1: ネイビー帯見出し専用） */
+body {
+  --swak-h1-spacing: 64px;
+}
+
+/* 本文から章へ移る余白を広げる。文頭・見出し直後は標準の間隔を保つ。 */
+.markdown-rendered h1,
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-line:has(> br:only-child):has(+ .HyperMD-header-1) {
+  --heading-spacing: var(--swak-h1-spacing);
+}
+
 .markdown-rendered h1,
 .markdown-source-view.mod-cm6 .cm-line.HyperMD-header-1 {
   background-color: #0B3D63 !important;
@@ -60,6 +70,25 @@
 
 /* PDFでは本文のH1と、Obsidianが直下に追加するファイル名タイトルを区別する。 */
 @media print {
+  /* 自然改ページを含め、ノートの外側余白を各ページに繰り返す。 */
+  .print > .markdown-preview-view {
+    box-decoration-break: clone;
+  }
+
+  .print > .markdown-preview-view > div:has(> :is(h1, h2, h3, h4, h5, h6)) {
+    break-inside: avoid-page;
+    break-after: avoid-page;
+  }
+
+  /* PDFの本文はブロックごとのdiv。2つ目以降のH1ラッパーで改ページする。 */
+  .print > .markdown-preview-view > div:has(> h1) ~ div:has(> h1) {
+    break-before: page;
+  }
+
+  .print > .markdown-preview-view > div:has(> h1) ~ div > h1 {
+    margin-top: 0;
+  }
+
   .print .markdown-rendered h1 {
     box-shadow: none !important;
   }
