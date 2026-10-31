@@ -1,26 +1,26 @@
-> [!NOTE] 本日のゴール
-> - 提案内容と進め方に合意する
-> - 次のアクションを決める
+> [!NOTE] Today's Goals / 本日のゴール
+> - Agree on the proposal and approach / 提案内容と進め方に合意する
+> - Decide the next actions / 次のアクションを決める
 
-# アジェンダ
+# Agenda / アジェンダ
 
-1. 現状の課題と提案
-2. 進め方と役割分担
+1. Current issues and proposal / 現状の課題と提案
+2. Approach and responsibilities / 進め方と役割分担
 
-# 協議事項
+# Discussion / 協議事項
 
-## 改善方針
+## Improvement Plan / 改善方針
 
-### ご提案
+### Proposal / ご提案
 
-情報の整理と入力手順を共通化し、日々の確認作業を減らします。
+Standardize information and data entry to reduce daily checks. / 情報の整理と入力手順を共通化し、日々の確認作業を減らします。
 
-> [!TIP] 推奨する進め方
-> 小さな範囲で試し、確認結果をもとに対象を広げます。
+> [!TIP] Recommended Approach / 推奨する進め方
+> Start small, then expand based on the results. / 小さな範囲で試し、確認結果をもとに対象を広げます。
 
-# まとめ
+# Summary / まとめ
 
-## 次のアクション
+## Next Actions / 次のアクション
 
-1. [ ] **資料の準備**: 現行の手順と課題を整理する
-2. [ ] **確認会の実施**: 試作画面を使って操作を確認する
+1. [ ] **Prepare / 資料の準備**: Document current steps and issues / 現行の手順と課題を整理する
+2. [ ] **Review / 確認会の実施**: Test the prototype / 試作画面を使って操作を確認する
