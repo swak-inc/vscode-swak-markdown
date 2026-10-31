@@ -60,9 +60,9 @@ Browser tests load the built assets and provider-generated HTML with an isolated
 npm run screenshots
 ```
 
-The script renders the public sample Markdown using the actual webview assets in isolated Chromium. Light/dark classes and editor color variables reproduce the IDE host inputs. Images capture the content pane, without simulated IDE chrome. The icon is the existing Swak GitHub organization avatar, used unchanged.
+The script renders the public sample Markdown using the actual webview assets in isolated Chromium. Light/dark classes and editor color variables reproduce the IDE host inputs. Images capture the content pane, without simulated IDE chrome. The extension icon uses the official `swak-logo_icon-stacked_black.png` brand asset unchanged, stored as `media/marketplace/icon.png`. Marketplace requires a raster icon rather than SVG.
 
-公開サンプルのMarkdownを拡張本体のWebview資材で独立したChromiumに描画します。ライト・ダークのクラスと色変数でIDEからの入力を再現し、IDEの外枠を合成せず本文ペインを撮影します。アイコンは既存のSwak GitHub組織アバターを変更せず使用しています。
+公開サンプルのMarkdownを拡張本体のWebview資材で独立したChromiumに描画します。ライト・ダークのクラスと色変数でIDEからの入力を再現し、IDEの外枠を合成せず本文ペインを撮影します。拡張アイコンは公式ブランド素材 `swak-logo_icon-stacked_black.png` を加工せず、`media/marketplace/icon.png` として収録しています。MarketplaceのアイコンはSVGに対応しないため、PNG版を使用します。
 
 ## Packaging / 配布物
 

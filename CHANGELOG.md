@@ -1,5 +1,10 @@
 # Changelog / 変更履歴
 
+## 0.3.8
+
+- Separate English and Japanese README sections and add the Marketplace installation link. / READMEの説明をEnglish・日本語に分け、Marketplaceからの導入リンクを追加しました。
+- Replace the extension icon with the official Swak stacked black logo. / 拡張アイコンを公式のSwak縦組み・黒ロゴに差し替えました。
+
 ## 0.3.7
 
 - Disable HTML form submission in the custom editor and clarify external-image requests in the privacy description. / カスタムエディターでHTMLフォームの送信を禁止し、外部画像の通信について明記しました。
