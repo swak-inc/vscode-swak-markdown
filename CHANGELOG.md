@@ -1,5 +1,9 @@
 # Changelog / 変更履歴
 
+## 1.0.0
+
+- First stable release of Swak Markdown, with editable live preview, reading view, a collapsible and resizable outline, and light/dark Swak styling. / ライブプレビュー編集・閲覧・開閉と幅調整に対応した目次・ライト／ダークのSwakスタイルを備えた初回正式版です。
+
 ## 0.3.8
 
 - Separate English and Japanese README sections and add the Marketplace installation link. / READMEの説明をEnglish・日本語に分け、Marketplaceからの導入リンクを追加しました。
