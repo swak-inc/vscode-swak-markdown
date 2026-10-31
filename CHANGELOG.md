@@ -1,5 +1,9 @@
 # Changelog / 変更履歴
 
+## 1.0.3
+
+- Keep the first H1 compact even after YAML frontmatter or introductory content; retain the chapter gap for later H1 headings. / YAMLや前置きの後でも最初のH1は通常の余白にし、2つ目以降のH1だけ章の区切りとして間隔を広げます。
+
 ## 1.0.2
 
 - Align heading sizes, heading-to-heading gaps, H3 body spacing, and callout layout with Obsidian; keep the opening agenda compact while retaining 64px chapter breaks. / 見出しサイズ・見出し同士とH3本文の間隔・コールアウトの配置をObsidianに揃え、冒頭アジェンダはコンパクトに、章の区切りは64pxに統一しました。

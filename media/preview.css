@@ -25,6 +25,10 @@ body.vscode-high-contrast { --text-highlight-bg: #665522; }
 .markdown-body :is(p, pre, table, .tableWrapper, ul, ol, blockquote:not(.callout)) + :is(h1, h2, h3, h4, h5, h6) {
   margin-top: var(--heading-spacing);
 }
+/* YAMLなどの前置きがあっても、最初のH1は章の切り替えとして扱わない。 */
+.markdown-body > h1:first-of-type:not(:first-child) {
+  margin-top: var(--p-spacing);
+}
 .markdown-body h1 { font-size: 1.618em; line-height: 1.2; }
 .markdown-body h2 { font-size: 1.462em; line-height: 1.2; }
 .markdown-body h3 { font-size: 1.318em; line-height: 1.3; }

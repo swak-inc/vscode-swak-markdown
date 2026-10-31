@@ -2,7 +2,7 @@
   "name": "swak-markdown-preview",
   "displayName": "Swak Markdown",
   "description": "Edit Markdown in a styled live preview, switch to reading view, and navigate with a resizable outline. / Markdownを整った表示で編集・閲覧。",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "swak-inc",
   "license": "MIT",
   "icon": "media/marketplace/icon.png",
