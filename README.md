@@ -50,17 +50,17 @@ Property labels and values use the same card design as Obsidian. Long descriptio
 
 ## Chapter Spacing & PDF / 章の余白とPDF
 
-The first H1 stays compact after introductory goals or properties. Later H1 headings following paragraphs or lists use a 64px top gap. Headings after callouts, adjacent headings, and the space below H3 stay compact. Live, reading, and built-in previews share these rules.
+The first H1 stays compact even when preceded by text or properties. Later H1 headings following paragraphs or lists use a 64px top gap. Headings after callouts, adjacent headings, and the space below H3 stay compact. Live, reading, and built-in previews share these rules.
 
-冒頭のゴールやプロパティに続く最初のH1は通常の間隔にし、本文の段落・リストから2つ目以降のH1へ移る上余白は64pxに揃えています。コールアウト直後、見出しが連続する箇所、H3直後は通常の間隔とし、ライブ・閲覧・標準プレビューで共通の余白にしています。
+最初のH1は、その前に文章やプロパティがある場合も通常の間隔にします。本文の段落・リストから2つ目以降のH1へ移る上余白は64pxに揃えています。コールアウト直後、見出しが連続する箇所、H3直後は通常の間隔とし、ライブ・閲覧・標準プレビューで共通の余白にしています。
 
 ![Meeting chapter spacing — Light](media/marketplace/meeting-light.png)
 
 ![Meeting chapter spacing — Dark](media/marketplace/meeting-dark.png)
 
-For a PDF with chapter page breaks, open the same Markdown in Obsidian with the Swak theme and use **Export to PDF**. The second and subsequent body H1 headings start new pages, while the first H1 stays with introductory content. The filename title is excluded. This extension does not provide a PDF export command. See the [Obsidian PDF guide](https://github.com/swak-inc/obsidian-theme-swak#chapter-spacing--pdf-export--章の余白とpdfエクスポート).
+For a PDF with chapter page breaks, open the same Markdown in Obsidian with the Swak theme and use **Export to PDF**. The first body H1 does not force a page break; the second and subsequent body H1 headings start a new page, regardless of what appears before the first H1. The filename title does not count as a body H1. This extension does not provide a PDF export command. See the [Obsidian PDF guide](https://github.com/swak-inc/obsidian-theme-swak#chapter-spacing--pdf-export--章の余白とpdfエクスポート).
 
-章ごとに改ページしたPDFは、同じMarkdownをSwakテーマのObsidianで開き、「PDFにエクスポート」から出力します。**本文の2つ目以降のH1で改ページ**し、冒頭のゴールと最初のH1は同じページに保ちます。ファイル名タイトルは改ページ対象外です。この拡張にはPDF出力コマンドはありません。[ObsidianのPDF出力ガイド](https://github.com/swak-inc/obsidian-theme-swak#chapter-spacing--pdf-export--章の余白とpdfエクスポート)を参照してください。
+章ごとに改ページしたPDFは、同じMarkdownをSwakテーマのObsidianで開き、「PDFにエクスポート」から出力します。**本文の最初のH1で強制改ページせず、2つ目以降のH1で改ページ**します。最初のH1より前の内容には依存しません。ファイル名タイトルは本文のH1として数えません。この拡張にはPDF出力コマンドはありません。[ObsidianのPDF出力ガイド](https://github.com/swak-inc/obsidian-theme-swak#chapter-spacing--pdf-export--章の余白とpdfエクスポート)を参照してください。
 
 See [1.1.0 release notes](CHANGELOG.md). / [1.1.0の変更履歴](CHANGELOG.md)。
 
