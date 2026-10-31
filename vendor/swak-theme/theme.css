@@ -114,6 +114,19 @@ body {
   --heading-spacing: var(--swak-h1-spacing);
 }
 
+/* コールアウトも本文の一部として扱い、次の見出しに通常の区切りを入れる。
+   Obsidianのブロックラッパーと、VS Codeの直接描画の両方に対応する。 */
+.markdown-rendered .callout + :is(h1, h2, h3, h4, h5, h6),
+.markdown-rendered div:has(> .callout) + div > :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: var(--heading-spacing);
+}
+
+/* 冒頭のコールアウトから最初のH1へは、章間の余白を追加しない。 */
+.markdown-rendered > .callout + h1:first-of-type,
+.markdown-rendered .markdown-preview-sizer > div:has(> .callout) + .el-h1:not(.el-h1 ~ .el-h1) > h1 {
+  margin-top: var(--p-spacing);
+}
+
 .markdown-rendered h1,
 .markdown-source-view.mod-cm6 .cm-line.HyperMD-header-1 {
   background-color: #0B3D63 !important;
@@ -890,8 +903,13 @@ body {
   padding-block-start: 0;
 }
 
-/* 表・数式の後は通常の見出し前余白を使い、ほかの埋め込みの余白とは重ねない */
-.markdown-source-view.mod-cm6.is-live-preview .cm-content > :is(.HyperMD-header, .hr, .cm-embed-block:not(.cm-table-widget, .math-block)) + .cm-line:has(> br:only-child):has(+ .HyperMD-header) {
+/* 表・数式・コールアウトの後は通常の見出し前余白を使う。 */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > :is(.HyperMD-header, .hr, .cm-embed-block:not(.cm-table-widget, .math-block, .callout, :has(.callout))) + .cm-line:has(> br:only-child):has(+ .HyperMD-header) {
+  padding-block-start: 0;
+}
+
+/* 冒頭のコールアウト直後にある最初のH1は、閲覧側と同じ通常の間隔にする。 */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > :is(.cm-embed-block:has(.callout), .HyperMD-quote) + .cm-line:has(> br:only-child):has(+ .HyperMD-header-1):not(.HyperMD-header-1 ~ .cm-line) {
   padding-block-start: 0;
 }
 

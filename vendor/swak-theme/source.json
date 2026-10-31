@@ -1,8 +1,8 @@
 {
   "repository": "https://github.com/swak-inc/obsidian-theme-swak",
-  "revision": "7d19e83b330d5676ef1ccc72ec373d3e3758edf9",
+  "revision": "df9061d91df041845366de78cfd5b749e18da208",
   "files": {
-    "theme.css": "4ea5bd83675578e6d925cdee6d07d17038e2a759f6a29b6bbce0a7c41af2a1ae",
+    "theme.css": "49c15b6ef6f86d8d298cc0d11461d59162bb2110b2a2f08ed496555b37842ba2",
     "LICENSE": "4495a425b9bc3cd75395646d1b6b4d37a47e4dba8c828ecaae4b46f02a42dce2",
     "ui-sample-en.md": "c74d52a592c442343017dfed24410990d0d16b160c3f597b9a8411bb91f17d14",
     "ui-sample-ja.md": "54648b1cd26c96ee71a10f589bb252a4b3bc3a6a2bf72c2575328e8f2effbddf",
