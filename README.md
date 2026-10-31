@@ -53,7 +53,7 @@ Outline width and collapsed branches persist while switching views in the same t
 
 **日本語**
 
-**ライブプレビュー（編集）**と**プレビュー（閲覧）**を同じタブで切り替え、編集位置とUndo履歴を保持します。IDE標準のMarkdownプレビューにもSwakの装飾を適用します。
+**ライブプレビュー**（編集）と**プレビュー**（閲覧）を同じタブで切り替え、編集位置とUndo履歴を保持します。IDE標準のMarkdownプレビューにもSwakの装飾を適用します。
 
 - **見出し階層**: H1〜H6の親子関係を青系のインデント線で表示します。
 - **開閉**: 親見出しごと、または全体を展開・折りたたみできます。
