@@ -40,29 +40,47 @@ Edit headings, paragraphs, tables, lists, quotes, callouts, and text emphasis di
 
 ### Properties / プロパティ
 
+**English**
+
 Property labels and values use the same card design as Obsidian. Long descriptions wrap without truncation. Body edits preserve the original YAML formatting, comments, and key order; use **ソース (Source)** to change properties.
+
+**日本語**
 
 項目名と値をObsidianと同じカードで整理し、長い説明文も省略せず折り返します。本文を編集してもYAMLの書式・コメント・項目順は保持します。プロパティの変更は**ソース**から行います。
 
+#### Light / ライト
+
 ![YAML properties matching Obsidian — Light](media/marketplace/properties-light.png)
+
+#### Dark / ダーク
 
 ![YAML properties matching Obsidian — Dark](media/marketplace/properties-dark.png)
 
 ## Chapter Spacing & PDF / 章の余白とPDF
 
+**English**
+
 The first H1 stays compact even when preceded by text or properties. Later H1 headings following paragraphs or lists use a 64px top gap. Headings after callouts, adjacent headings, and the space below H3 stay compact. Live, reading, and built-in previews share these rules.
-
-最初のH1は、その前に文章やプロパティがある場合も通常の間隔にします。本文の段落・リストから2つ目以降のH1へ移る上余白は64pxに揃えています。コールアウト直後、見出しが連続する箇所、H3直後は通常の間隔とし、ライブ・閲覧・標準プレビューで共通の余白にしています。
-
-![Meeting chapter spacing — Light](media/marketplace/meeting-light.png)
-
-![Meeting chapter spacing — Dark](media/marketplace/meeting-dark.png)
 
 For a PDF with chapter page breaks, open the same Markdown in Obsidian with the Swak theme and use **Export to PDF**. The first body H1 does not force a page break; the second and subsequent body H1 headings start a new page, regardless of what appears before the first H1. The filename title does not count as a body H1. This extension does not provide a PDF export command. See the [Obsidian PDF guide](https://github.com/swak-inc/obsidian-theme-swak#chapter-spacing--pdf-export--章の余白とpdfエクスポート).
 
+See [1.1.0 release notes](CHANGELOG.md).
+
+**日本語**
+
+最初のH1は、その前に文章やプロパティがある場合も通常の間隔にします。本文の段落・リストから2つ目以降のH1へ移る上余白は64pxに揃えています。コールアウト直後、見出しが連続する箇所、H3直後は通常の間隔とし、ライブ・閲覧・標準プレビューで共通の余白にしています。
+
 章ごとに改ページしたPDFは、同じMarkdownをSwakテーマのObsidianで開き、「PDFにエクスポート」から出力します。**本文の最初のH1で強制改ページせず、2つ目以降のH1で改ページ**します。最初のH1より前の内容には依存しません。ファイル名タイトルは本文のH1として数えません。この拡張にはPDF出力コマンドはありません。[ObsidianのPDF出力ガイド](https://github.com/swak-inc/obsidian-theme-swak#chapter-spacing--pdf-export--章の余白とpdfエクスポート)を参照してください。
 
-See [1.1.0 release notes](CHANGELOG.md). / [1.1.0の変更履歴](CHANGELOG.md)。
+[1.1.0の変更履歴](CHANGELOG.md)。
+
+### Light / ライト
+
+![Meeting chapter spacing — Light](media/marketplace/meeting-light.png)
+
+### Dark / ダーク
+
+![Meeting chapter spacing — Dark](media/marketplace/meeting-dark.png)
 
 ## Reading View & Outline / 閲覧と目次
 
@@ -174,15 +192,25 @@ Obsidian形式のコールアウトで情報を整理できます。ネストと
 
 ### Information & Recommendations / 情報・推奨
 
+#### Light / ライト
+
 ![Information and recommendation callouts — Light](media/marketplace/callouts-information-light.png)
+
+#### Dark / ダーク
 
 ![Information and recommendation callouts — Dark](media/marketplace/callouts-information-dark.png)
 
 ### Questions, Risks & Quotes / 確認・危険・引用
 
+#### Light / ライト
+
 ![Question, risk, and quote callouts — Light](media/marketplace/callouts-attention-light.png)
 
+#### Dark / ダーク
+
 ![Question, risk, and quote callouts — Dark](media/marketplace/callouts-attention-dark.png)
+
+### Screenshot Details / 撮影情報
 
 **English**
 
