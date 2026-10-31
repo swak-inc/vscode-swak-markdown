@@ -37,7 +37,83 @@
   color: #93C5FD !important;
 }
 
+/* 0.5 プロパティ: 本文と同じ文字サイズで項目名・値を読み分ける共通カード */
+.markdown-rendered .metadata-container,
+.markdown-source-view.mod-cm6.is-live-preview .metadata-container {
+  --metadata-background: #F6F8FB;
+  --metadata-border-color: #D5DFEA;
+  --metadata-border-radius: 6px;
+  --metadata-border-width: 1px;
+  --metadata-padding: 12px 14px;
+  --metadata-gap: 0;
+  --metadata-property-padding: 6px 0;
+  --metadata-label-width: 10em;
+  --metadata-label-font-size: var(--font-text-size, 1rem);
+  --metadata-label-font-weight: 600;
+  --metadata-label-text-color: #40566D;
+  --metadata-input-font-size: var(--font-text-size, 1rem);
+  --metadata-input-height: 30px;
+  --metadata-input-padding: 4px 8px;
+  --metadata-input-longtext-lines: none;
+  --swak-metadata-divider: #E2E8F0;
+  border: var(--metadata-border-width) solid var(--metadata-border-color);
+  border-radius: var(--metadata-border-radius);
+  background: var(--metadata-background);
+  padding: var(--metadata-padding);
+  transform: none;
+  margin-block-end: var(--p-spacing);
+}
+
+.theme-dark .markdown-rendered .metadata-container,
+.theme-dark .markdown-source-view.mod-cm6.is-live-preview .metadata-container {
+  --metadata-background: #202B3A;
+  --metadata-border-color: #3D5066;
+  --metadata-label-text-color: #B2C8DE;
+  --swak-metadata-divider: #35465A;
+}
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6.is-live-preview) .metadata-container .metadata-properties-heading {
+  padding: 0 4px 8px;
+  margin-bottom: 0;
+}
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6.is-live-preview) .metadata-container .metadata-properties-title {
+  font-size: 0.92em;
+  font-weight: 600;
+  color: var(--metadata-label-text-color);
+}
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6.is-live-preview) .metadata-container .metadata-property + .metadata-property {
+  border-top: 1px solid var(--swak-metadata-divider);
+}
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6.is-live-preview) .metadata-container .metadata-property-value {
+  align-items: flex-start;
+  min-width: 0;
+}
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6.is-live-preview) .metadata-container :is(.metadata-input-longtext, .metadata-input-text, .metadata-input-number) {
+  font-size: var(--metadata-input-font-size);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* プロパティから本文への段落1つ分の間隔に、編集側の冒頭空行も含める。 */
+.markdown-source-view.mod-cm6.is-live-preview .metadata-container:has(~ .cm-contentContainer > .cm-content > [contenteditable="false"]:empty:first-child + .cm-line > br:only-child) {
+  margin-block-end: 0;
+}
+
 /* 1. 大見出しアクセント（H1: ネイビー帯見出し専用） */
+body {
+  --swak-h1-spacing: 64px;
+}
+
+/* 本文から章へ移る余白を広げる。文頭・見出し直後は標準の間隔を保つ。 */
+.markdown-rendered h1,
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-line:has(> br:only-child):has(+ .HyperMD-header-1) {
+  --heading-spacing: var(--swak-h1-spacing);
+}
+
 .markdown-rendered h1,
 .markdown-source-view.mod-cm6 .cm-line.HyperMD-header-1 {
   background-color: #0B3D63 !important;
@@ -60,6 +136,25 @@
 
 /* PDFでは本文のH1と、Obsidianが直下に追加するファイル名タイトルを区別する。 */
 @media print {
+  /* 自然改ページを含め、ノートの外側余白を各ページに繰り返す。 */
+  .print > .markdown-preview-view {
+    box-decoration-break: clone;
+  }
+
+  .print > .markdown-preview-view > div:has(> :is(h1, h2, h3, h4, h5, h6)) {
+    break-inside: avoid-page;
+    break-after: avoid-page;
+  }
+
+  /* PDFの本文はブロックごとのdiv。2つ目以降のH1ラッパーで改ページする。 */
+  .print > .markdown-preview-view > div:has(> h1) ~ div:has(> h1) {
+    break-before: page;
+  }
+
+  .print > .markdown-preview-view > div:has(> h1) ~ div > h1 {
+    margin-top: 0;
+  }
+
   .print .markdown-rendered h1 {
     box-shadow: none !important;
   }
@@ -789,8 +884,9 @@ body {
   padding-block-start: max(0px, calc(var(--heading-spacing) - 2 * var(--p-spacing)));
 }
 
-/* 文頭も入力可能な空行の高さを保ち、選択状態によって高さを変えない */
-.markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-line:first-child:has(> br:only-child):has(+ .HyperMD-header) {
+/* 文頭も入力可能な空行の高さを保つ。非表示YAMLの空ウィジェットは本文に数えない。 */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-line:first-child:has(> br:only-child):has(+ .HyperMD-header),
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > [contenteditable="false"]:empty:first-child + .cm-line:has(> br:only-child):has(+ .HyperMD-header) {
   padding-block-start: 0;
 }
 

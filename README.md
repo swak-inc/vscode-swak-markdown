@@ -24,11 +24,11 @@ VS Codeデスクトップ版とAntigravity IDEなどの互換エディター向�
 
 **English**
 
-Edit headings, paragraphs, tables, lists, quotes, callouts, and text emphasis directly. Save, undo, and redo without leaving the document. Click a task checkbox to update its Markdown.
+Edit headings, paragraphs, tables, lists, quotes, callouts, and text emphasis directly. Save, undo, and redo without leaving the document. Click a task checkbox to update its Markdown. YAML frontmatter appears as a readable property card matching Obsidian; use **Source** to edit its values.
 
 **日本語**
 
-見出し・本文・表・リスト・引用・コールアウト・文字装飾を直接編集できます。保存・Undo・Redoも同じ画面で操作し、タスクのチェック状態はクリックで変更できます。
+見出し・本文・表・リスト・引用・コールアウト・文字装飾を直接編集できます。保存・Undo・Redoも同じ画面で操作し、タスクのチェック状態はクリックで変更できます。YAMLはObsidianと揃えた読みやすいプロパティ欄として表示し、値は**ソース**から編集できます。
 
 ### Light / ライト
 
@@ -37,6 +37,50 @@ Edit headings, paragraphs, tables, lists, quotes, callouts, and text emphasis di
 ### Dark / ダーク
 
 ![Swak Markdown live editor with outline — Dark](media/marketplace/live-dark.png)
+
+### Properties / プロパティ
+
+**English**
+
+Property labels and values use the same card design as Obsidian. Long descriptions wrap without truncation. Body edits preserve the original YAML formatting, comments, and key order; use **ソース (Source)** to change properties.
+
+**日本語**
+
+項目名と値をObsidianと同じカードで整理し、長い説明文も省略せず折り返します。本文を編集してもYAMLの書式・コメント・項目順は保持します。プロパティの変更は**ソース**から行います。
+
+#### Light / ライト
+
+![YAML properties matching Obsidian — Light](media/marketplace/properties-light.png)
+
+#### Dark / ダーク
+
+![YAML properties matching Obsidian — Dark](media/marketplace/properties-dark.png)
+
+## Chapter Spacing & PDF / 章の余白とPDF
+
+**English**
+
+The first H1 stays compact even when preceded by text or properties. Later H1 headings following paragraphs or lists use a 64px top gap. Headings after callouts, adjacent headings, and the space below H3 stay compact. Live, reading, and built-in previews share these rules.
+
+For a PDF with chapter page breaks, open the same Markdown in Obsidian with the Swak theme and use **Export to PDF**. The first body H1 does not force a page break; the second and subsequent body H1 headings start a new page, regardless of what appears before the first H1. The filename title does not count as a body H1. This extension does not provide a PDF export command. See the [Obsidian PDF guide](https://github.com/swak-inc/obsidian-theme-swak#chapter-spacing--pdf-export--章の余白とpdfエクスポート).
+
+See [1.1.0 release notes](CHANGELOG.md).
+
+**日本語**
+
+最初のH1は、その前に文章やプロパティがある場合も通常の間隔にします。本文の段落・リストから2つ目以降のH1へ移る上余白は64pxに揃えています。コールアウト直後、見出しが連続する箇所、H3直後は通常の間隔とし、ライブ・閲覧・標準プレビューで共通の余白にしています。
+
+章ごとに改ページしたPDFは、同じMarkdownをSwakテーマのObsidianで開き、「PDFにエクスポート」から出力します。**本文の最初のH1で強制改ページせず、2つ目以降のH1で改ページ**します。最初のH1より前の内容には依存しません。ファイル名タイトルは本文のH1として数えません。この拡張にはPDF出力コマンドはありません。[ObsidianのPDF出力ガイド](https://github.com/swak-inc/obsidian-theme-swak#chapter-spacing--pdf-export--章の余白とpdfエクスポート)を参照してください。
+
+[1.1.0の変更履歴](CHANGELOG.md)。
+
+### Light / ライト
+
+![Meeting chapter spacing — Light](media/marketplace/meeting-light.png)
+
+### Dark / ダーク
+
+![Meeting chapter spacing — Dark](media/marketplace/meeting-dark.png)
 
 ## Reading View & Outline / 閲覧と目次
 
@@ -148,15 +192,25 @@ Obsidian形式のコールアウトで情報を整理できます。ネストと
 
 ### Information & Recommendations / 情報・推奨
 
+#### Light / ライト
+
 ![Information and recommendation callouts — Light](media/marketplace/callouts-information-light.png)
+
+#### Dark / ダーク
 
 ![Information and recommendation callouts — Dark](media/marketplace/callouts-information-dark.png)
 
 ### Questions, Risks & Quotes / 確認・危険・引用
 
+#### Light / ライト
+
 ![Question, risk, and quote callouts — Light](media/marketplace/callouts-attention-light.png)
 
+#### Dark / ダーク
+
 ![Question, risk, and quote callouts — Dark](media/marketplace/callouts-attention-dark.png)
+
+### Screenshot Details / 撮影情報
 
 **English**
 
@@ -238,7 +292,8 @@ Set the associations above to `default`, or remove the entries, to use the regul
 | Headings, tables, lists, quotes, emphasis | Editable | Rendered |
 | Callouts and task lists | Editable; titles use Markdown text | Rendered |
 | Math | Preserved as source; edit in Source | Rendered with KaTeX |
-| HTML and YAML | Preserved as source; edit in Source | HTML is sanitized; YAML has no property editor |
+| YAML properties | Property card; edit in Source; original formatting preserved | Same property card |
+| HTML | Preserved as source; edit in Source | Sanitized HTML |
 | Wiki links and note embeds | Preserved as source | No Obsidian vault resolution |
 | Mermaid | Editable code block | Code block; no diagram rendering |
 
@@ -253,7 +308,8 @@ This is a separate editor, not the Obsidian editing engine. It does not change t
 | 見出し・表・リスト・引用・装飾 | 編集可能 | 表示 |
 | コールアウト・タスク | 編集可能・タイトルはMarkdown記法 | 表示 |
 | 数式 | 記法を保持・ソースで編集 | KaTeXで表示 |
-| HTMLとYAML | 記法を保持・ソースで編集 | HTMLを安全化して表示・YAMLのプロパティ画面なし |
+| YAMLプロパティ | プロパティ欄として表示・ソースで編集・元記法を保持 | 同じプロパティ欄を表示 |
+| HTML | 記法を保持・ソースで編集 | HTMLを安全化して表示 |
 | Wikiリンク・ノート埋め込み | 記法を保持 | Obsidian保管庫のリンク解決なし |
 | Mermaid | コードとして編集 | コード表示・図への変換なし |
 

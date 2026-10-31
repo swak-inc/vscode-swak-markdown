@@ -57,6 +57,22 @@ test('表の揃えとパイプ文字、番号付きタスクを編集後も保�
   assert.ok(parser.parse(source).eq(parser.parse(tableSerialized)));
 });
 
+test('コールアウトのタイトルを空段落にせず、リスト・ネスト・空本文を編集可能なまま保持する', () => {
+  const source = '> [!NOTE] 本日のゴール\n> - 合意事項1\n> - 合意事項2\n\n> [!tip]+ 外側\n>\n> > [!note] 内側\n> > - 確認\n\n> [!note] 空\n\n> [!note] 通常\n> 本文\n';
+  const model = parseDocument(source);
+  assert.equal(serializeDocument(model.doc, model.originals), source);
+  assert.equal(model.doc.child(0).firstChild.type.name, 'bullet_list');
+  assert.equal(model.doc.child(1).firstChild.type.name, 'callout');
+  assert.equal(model.doc.child(1).firstChild.firstChild.type.name, 'bullet_list');
+  assert.equal(model.doc.child(2).firstChild.type.name, 'paragraph');
+  assert.equal(model.doc.child(3).firstChild.textContent, '本文');
+  let state = EditorState.create({ doc: model.doc });
+  state = state.apply(state.tr.insertText('追加', 4));
+  const output = serializeDocument(state.doc, model.originals);
+  assert.match(output, /> \[!note\] 本日のゴール\n> - 追加合意事項1/);
+  assert.ok(state.doc.eq(parser.parse(output)));
+});
+
 test('HTML・数式・Wikiリンクは実行や欠落を伴わず元記法で保存する', () => {
   const source = '---\ntitle: Example\n---\n\n本文 $E=mc^2$ と ![[note]]\n\n$$\nx^2\n$$\n\n<div onclick="alert(1)">HTML</div>\n';
   const model = parseDocument(source);
