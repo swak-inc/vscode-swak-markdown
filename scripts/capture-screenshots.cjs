@@ -21,6 +21,7 @@ async function main() {
     return match[1].trim() + '\n';
   };
   const samples = [
+    { name: 'properties', text: '---\nname: project-notes\ndescription: 会議の目的と合意事項をまとめるノート。項目名と値を読み分けやすく表示し、長い説明文も省略せず確認できます。\nstatus: In progress\n---\n\n# プロジェクトノート\n\n概要を確認してから、次のアクションを整理します。\n', mode: 'live', height: 720, crop: true },
     { name: 'live', text: (await fs.readFile(path.join(sampleDirectory, 'ui-sample-en.md'), 'utf8')).split('\n---\n')[0], mode: 'live', height: 1400, crop: true },
     { name: 'reading', text: (await fs.readFile(path.join(sampleDirectory, 'ui-sample-ja.md'), 'utf8')).split('\n---\n')[0], mode: 'preview', height: 1400, crop: true },
     { name: 'typography', text: section('typography').split('A footnote adds context.')[0], mode: 'preview', height: 1080, crop: true },

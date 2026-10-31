@@ -24,11 +24,11 @@ VS Codeデスクトップ版とAntigravity IDEなどの互換エディター向�
 
 **English**
 
-Edit headings, paragraphs, tables, lists, quotes, callouts, and text emphasis directly. Save, undo, and redo without leaving the document. Click a task checkbox to update its Markdown.
+Edit headings, paragraphs, tables, lists, quotes, callouts, and text emphasis directly. Save, undo, and redo without leaving the document. Click a task checkbox to update its Markdown. YAML frontmatter appears as a readable property card matching Obsidian; use **Source** to edit its values.
 
 **日本語**
 
-見出し・本文・表・リスト・引用・コールアウト・文字装飾を直接編集できます。保存・Undo・Redoも同じ画面で操作し、タスクのチェック状態はクリックで変更できます。
+見出し・本文・表・リスト・引用・コールアウト・文字装飾を直接編集できます。保存・Undo・Redoも同じ画面で操作し、タスクのチェック状態はクリックで変更できます。YAMLはObsidianと揃えた読みやすいプロパティ欄として表示し、値は**ソース**から編集できます。
 
 ### Light / ライト
 
@@ -37,6 +37,12 @@ Edit headings, paragraphs, tables, lists, quotes, callouts, and text emphasis di
 ### Dark / ダーク
 
 ![Swak Markdown live editor with outline — Dark](media/marketplace/live-dark.png)
+
+### Properties / プロパティ
+
+![YAML properties matching Obsidian — Light](media/marketplace/properties-light.png)
+
+![YAML properties matching Obsidian — Dark](media/marketplace/properties-dark.png)
 
 ## Reading View & Outline / 閲覧と目次
 
@@ -238,7 +244,8 @@ Set the associations above to `default`, or remove the entries, to use the regul
 | Headings, tables, lists, quotes, emphasis | Editable | Rendered |
 | Callouts and task lists | Editable; titles use Markdown text | Rendered |
 | Math | Preserved as source; edit in Source | Rendered with KaTeX |
-| HTML and YAML | Preserved as source; edit in Source | HTML is sanitized; YAML has no property editor |
+| YAML properties | Property card; edit in Source; original formatting preserved | Same property card |
+| HTML | Preserved as source; edit in Source | Sanitized HTML |
 | Wiki links and note embeds | Preserved as source | No Obsidian vault resolution |
 | Mermaid | Editable code block | Code block; no diagram rendering |
 
@@ -253,7 +260,8 @@ This is a separate editor, not the Obsidian editing engine. It does not change t
 | 見出し・表・リスト・引用・装飾 | 編集可能 | 表示 |
 | コールアウト・タスク | 編集可能・タイトルはMarkdown記法 | 表示 |
 | 数式 | 記法を保持・ソースで編集 | KaTeXで表示 |
-| HTMLとYAML | 記法を保持・ソースで編集 | HTMLを安全化して表示・YAMLのプロパティ画面なし |
+| YAMLプロパティ | プロパティ欄として表示・ソースで編集・元記法を保持 | 同じプロパティ欄を表示 |
+| HTML | 記法を保持・ソースで編集 | HTMLを安全化して表示 |
 | Wikiリンク・ノート埋め込み | 記法を保持 | Obsidian保管庫のリンク解決なし |
 | Mermaid | コードとして編集 | コード表示・図への変換なし |
 

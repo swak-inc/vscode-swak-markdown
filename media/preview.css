@@ -97,6 +97,26 @@ body.vscode-high-contrast { --text-highlight-bg: #665522; }
 .markdown-body details.callout > summary:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 .markdown-body .callout-fold::before { content: '›'; display: block; font-size: 1.2em; }
 .markdown-body details.callout[open] > summary .callout-fold::before { transform: rotate(90deg); }
+
+/* プロパティの色・寸法は共通テーマ、Obsidian標準DOMの基礎配置だけを補う。 */
+.markdown-body .swak-properties { box-sizing: border-box; white-space: normal; }
+.markdown-body .swak-properties .metadata-properties-heading { line-height: 1.2; }
+.markdown-body .swak-properties .metadata-properties { display: flex; flex-direction: column; gap: var(--metadata-gap); }
+.markdown-body .swak-properties .metadata-property { display: flex; align-items: flex-start; padding: var(--metadata-property-padding); }
+.markdown-body .swak-properties .metadata-property-key {
+  display: flex;
+  flex: 0 0 var(--metadata-label-width);
+  min-width: 0;
+  color: var(--metadata-label-text-color);
+  font-size: var(--metadata-label-font-size);
+  font-weight: var(--metadata-label-font-weight);
+}
+.markdown-body .swak-properties .metadata-property-icon { display: flex; align-items: center; flex: 0 0 20px; height: var(--metadata-input-height); padding-left: 4px; box-sizing: border-box; opacity: 0.7; }
+.markdown-body .swak-properties .metadata-property-icon svg { width: 16px; height: 16px; }
+.markdown-body .swak-properties .metadata-property-key-input { padding: var(--metadata-input-padding); min-width: 0; overflow-wrap: anywhere; }
+.markdown-body .swak-properties .metadata-property-value { display: flex; flex: 1; color: var(--text-normal); }
+.markdown-body .swak-properties .metadata-input-longtext { padding: var(--metadata-input-padding); white-space: pre-wrap; }
+.markdown-body .swak-properties .swak-properties-source { margin: 0; white-space: pre-wrap; }
 @media (max-width: 480px) {
   body.vscode-body { padding: 16px; }
 }

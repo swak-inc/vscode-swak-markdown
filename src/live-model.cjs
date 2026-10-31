@@ -4,6 +4,7 @@ const { schema: baseSchema, MarkdownParser, MarkdownSerializer, defaultMarkdownP
 const { tableNodes } = require('prosemirror-tables');
 const callouts = require('./callouts.cjs');
 const mark = require('./mark.cjs');
+const { frontmatter, propertiesDOM } = require('./frontmatter.cjs');
 
 let nodes = baseSchema.spec.nodes.update('list_item', {
   ...baseSchema.spec.nodes.get('list_item'),
@@ -21,6 +22,10 @@ let nodes = baseSchema.spec.nodes.update('list_item', {
     group: 'block', atom: true, attrs: { raw: {} },
     toDOM: node => ['pre', { class: 'swak-raw-block', title: 'ソース表示から編集できます' }, ['code', node.attrs.raw]]
   },
+  frontmatter: {
+    group: 'block', atom: true, attrs: { raw: {} },
+    toDOM: node => propertiesDOM(node.attrs.raw)
+  },
   raw_inline: {
     group: 'inline', inline: true, atom: true, attrs: { raw: {} },
     toDOM: node => ['code', { class: 'swak-raw-inline' }, node.attrs.raw]
@@ -31,14 +36,13 @@ const marks = baseSchema.spec.marks.addToStart('highlight', {
   toDOM: () => ['mark', 0], parseDOM: [{ tag: 'mark' }]
 }).append({ strike: { toDOM: () => ['s', 0], parseDOM: [{ tag: 's' }, { tag: 'del' }] } });
 const schema = new Schema({ nodes, marks });
-const md = new MarkdownIt({ html: true }).use(callouts).use(mark);
+const md = new MarkdownIt({ html: true }).use(callouts).use(mark).use(frontmatter);
 
-// YAML・数式・Obsidianリンクは、未対応の編集で内容を失わないよう元記法を保持する。
+// 数式・Obsidianリンクは、未対応の編集で内容を失わないよう元記法を保持する。
 md.block.ruler.before('fence', 'swak-raw-block', (state, start, end, silent) => {
   const line = state.src.slice(state.bMarks[start] + state.tShift[start], state.eMarks[start]);
-  const yaml = start === 0 && line === '---';
   const math = line === '$$';
-  if (!yaml && !math) return false;
+  if (!math) return false;
   let last = start + 1;
   while (last < end && state.src.slice(state.bMarks[last], state.eMarks[last]).trim() !== line) last++;
   if (last === end) return false;
@@ -84,6 +88,7 @@ const parser = new MarkdownParser(schema, md, {
   html_block: { node: 'raw_block', getAttrs: token => ({ raw: token.content }) },
   html_inline: { node: 'raw_inline', getAttrs: token => ({ raw: token.content }) },
   swak_raw_block: { node: 'raw_block', getAttrs: token => ({ raw: token.content }) },
+  swak_frontmatter: { node: 'frontmatter', getAttrs: token => ({ raw: token.content }) },
   swak_raw_inline: { node: 'raw_inline', getAttrs: token => ({ raw: token.content }) }
 });
 const serializer = new MarkdownSerializer({
@@ -116,6 +121,7 @@ const serializer = new MarkdownSerializer({
     state.closeBlock(node);
   },
   raw_block(state, node) { state.write(node.attrs.raw); state.closeBlock(node); },
+  frontmatter(state, node) { state.write(node.attrs.raw); state.closeBlock(node); },
   raw_inline(state, node) { state.write(node.attrs.raw); }
 }, {
   ...defaultMarkdownSerializer.marks,

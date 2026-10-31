@@ -1,5 +1,10 @@
 # Changelog / 変更履歴
 
+## 1.0.4
+
+- Display YAML frontmatter as a readable property card in live, reading, and built-in previews, using the shared Obsidian design. / YAMLを項目名・値のプロパティ欄として表示し、ライブ・閲覧・標準プレビューをObsidianと同じデザインに揃えました。
+- Preserve original YAML formatting and comments when editing the body; edit properties in Source. / 本文編集時もYAMLの書式とコメントを保持します。プロパティの変更はソースから行えます。
+
 ## 1.0.3
 
 - Keep the first H1 compact even after YAML frontmatter or introductory content; retain the chapter gap for later H1 headings. / YAMLや前置きの後でも最初のH1は通常の余白にし、2つ目以降のH1だけ章の区切りとして間隔を広げます。
