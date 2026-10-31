@@ -1,6 +1,6 @@
 # Changelog / 変更履歴
 
-## Unreleased / 未公開
+## 1.1.1
 
 - Match heading spacing after callouts to paragraphs and tables in live, reading, and built-in previews, while keeping the opening H1 and adjacent headings compact. / ライブ・閲覧・標準プレビューでコールアウト後の見出し余白を本文・テーブル後と統一し、冒頭のH1と見出しが連続する箇所はコンパクトに保ちます。
 

@@ -64,7 +64,7 @@ The first H1 stays compact even when preceded by text or properties. Later H1 he
 
 For a PDF with chapter page breaks, open the same Markdown in Obsidian with the Swak theme and use **Export to PDF**. The first body H1 does not force a page break; the second and subsequent body H1 headings start a new page, regardless of what appears before the first H1. The filename title does not count as a body H1. This extension does not provide a PDF export command. See the [Obsidian PDF guide](https://github.com/swak-inc/obsidian-theme-swak#chapter-spacing--pdf-export--章の余白とpdfエクスポート).
 
-See [1.1.0 release notes](CHANGELOG.md).
+See [1.1.1 release notes](CHANGELOG.md).
 
 **日本語**
 
@@ -72,7 +72,7 @@ See [1.1.0 release notes](CHANGELOG.md).
 
 章ごとに改ページしたPDFは、同じMarkdownをSwakテーマのObsidianで開き、「PDFにエクスポート」から出力します。**本文の最初のH1で強制改ページせず、2つ目以降のH1で改ページ**します。最初のH1より前の内容には依存しません。ファイル名タイトルは本文のH1として数えません。この拡張にはPDF出力コマンドはありません。[ObsidianのPDF出力ガイド](https://github.com/swak-inc/obsidian-theme-swak#chapter-spacing--pdf-export--章の余白とpdfエクスポート)を参照してください。
 
-[1.1.0の変更履歴](CHANGELOG.md)。
+[1.1.1の変更履歴](CHANGELOG.md)。
 
 ### Light / ライト
 
