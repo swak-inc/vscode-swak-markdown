@@ -2,11 +2,6 @@
 body.vscode-body {
   --text-normal: var(--vscode-editor-foreground);
   --text-muted: var(--vscode-descriptionForeground);
-  --p-spacing: 1rem;
-  --heading-spacing: calc(var(--p-spacing) * 2.5);
-  --list-spacing: 0.075em;
-  --line-height-normal: 1.5;
-  --table-line-height: 1.5;
   --blockquote-border-thickness: 2px;
   --indentation-guide-width: 1px;
   --text-highlight-bg: #fff3a3;
@@ -16,7 +11,7 @@ body.vscode-body {
 }
 body.vscode-dark,
 body.vscode-high-contrast { --text-highlight-bg: #665522; }
-.markdown-body { max-width: 900px; margin: 0 auto; }
+.markdown-body { max-width: 900px; margin: 0 auto; line-height: var(--markdown-line-height, var(--line-height-normal)); }
 .markdown-body :is(h1, h2, h3, h4, h5, h6) {
   margin-block: var(--p-spacing);
 }
@@ -79,7 +74,7 @@ body.vscode-high-contrast { --text-highlight-bg: #665522; }
 .markdown-body pre { padding: 1em; overflow: auto; }
 .markdown-body pre code { color: var(--code-normal); }
 .markdown-body mark { background: var(--text-highlight-bg); color: inherit; padding: 0.05em 0; }
-.markdown-body .callout { padding: 12px 12px 12px 24px; margin-block: var(--p-spacing); overflow: hidden; }
+.markdown-body .callout { padding: var(--callout-padding); margin-block: var(--p-spacing); overflow: hidden; }
 .markdown-body > .callout:first-child { margin-top: 0; }
 .markdown-body .callout-title {
   display: flex;

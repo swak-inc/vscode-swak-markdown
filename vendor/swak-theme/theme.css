@@ -2,6 +2,20 @@
    Swak Official Theme - Reading & Live Preview
    ========================================================================== */
 
+/* 文書内の行間・余白を共通化。アプリのサイドバーやツールバーには適用しない。 */
+.markdown-rendered,
+.markdown-source-view.mod-cm6 {
+  --p-spacing: 1.2rem;
+  --heading-spacing: calc(var(--p-spacing) * 2.5);
+  --swak-h2-spacing-extra: 6px;
+  --swak-h3-spacing: max(0px, calc(var(--p-spacing) - 10px));
+  --line-height-normal: 1.6;
+  --list-spacing: 0.125em;
+  --table-line-height: 1.5;
+  --callout-padding: 16px 16px 16px 24px;
+  --swak-table-cell-padding: 10px 14px;
+}
+
 /* 0. ファイル名タイトル（ノート最上部のファイル名・タブ・サイドバー）の文字色 */
 .inline-title,
 .markdown-rendered .inline-title,
@@ -44,9 +58,9 @@
   --metadata-border-color: #D5DFEA;
   --metadata-border-radius: 6px;
   --metadata-border-width: 1px;
-  --metadata-padding: 12px 14px;
+  --metadata-padding: 14px 16px;
   --metadata-gap: 0;
-  --metadata-property-padding: 6px 0;
+  --metadata-property-padding: 7px 0;
   --metadata-label-width: 10em;
   --metadata-label-font-size: var(--font-text-size, 1rem);
   --metadata-label-font-weight: 600;
@@ -121,9 +135,10 @@ body {
   margin-top: var(--heading-spacing);
 }
 
-/* 冒頭のコールアウトから最初のH1へは、章間の余白を追加しない。 */
+/* 冒頭のコールアウトから最初のH1へは、章間の余白を追加しない。
+   Obsidianは画面外の章をDOMから外すため、冒頭の判定には上方の省略高さも使う。 */
 .markdown-rendered > .callout + h1:first-of-type,
-.markdown-rendered .markdown-preview-sizer > div:has(> .callout) + .el-h1:not(.el-h1 ~ .el-h1) > h1 {
+.markdown-rendered .markdown-preview-sizer:has(> .markdown-preview-pusher[style*="margin-bottom: 0px"]) > div:has(> .callout) + .el-h1:not(.el-h1 ~ .el-h1) > h1 {
   margin-top: var(--p-spacing);
 }
 
@@ -132,7 +147,7 @@ body {
   background-color: #0B3D63 !important;
   color: #FFFFFF !important;
   font-weight: 700 !important;
-  padding: 6px 14px !important;
+  padding: 8px 16px !important;
   border-radius: 3px !important;
   letter-spacing: 0.02em !important;
   border: none !important;
@@ -182,12 +197,24 @@ body {
 
 /* 1.5 中見出しアクセント（H2: ペールアイスブルー帯 + 濃紺文字） */
 .markdown-rendered h2,
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-line:has(> br:only-child):has(+ .HyperMD-header-2) {
+  --heading-spacing: calc(var(--p-spacing) * 2.5 + var(--swak-h2-spacing-extra));
+  --swak-heading-adjacent-extra: var(--swak-h2-spacing-extra);
+}
+
+/* 見出しが続く箇所でも、H2の前に同じ追加余白を入れる。 */
+.markdown-rendered :is(h1, h2, h3, h4, h5, h6) + h2,
+.markdown-rendered div:has(> :is(h1, h2, h3, h4, h5, h6)) + div > h2 {
+  margin-top: calc(var(--p-spacing) + var(--swak-h2-spacing-extra));
+}
+
+.markdown-rendered h2,
 .markdown-source-view.mod-cm6 .cm-line.HyperMD-header-2 {
   background-color: #E6EFF7 !important;
   box-shadow: none !important;
   color: #0B3D63 !important;
   font-weight: 700 !important;
-  padding: 5px 12px !important;
+  padding: 7px 14px !important;
   border: none !important;
   border-radius: 3px !important;
   letter-spacing: 0.01em !important;
@@ -219,17 +246,15 @@ body {
   padding-left: 0 !important;
 }
 
-/* ビューモード: 直後要素のデフォルト余白を相殺し自然な距離感に */
+/* H3と後続の本文を近づける。負のmarginを使わず、表の重なりも防ぐ。 */
 .markdown-rendered h3 {
   padding-bottom: 0 !important;
-  margin-bottom: -10px !important;
+  margin-bottom: var(--swak-h3-spacing) !important;
 }
 
-/* 表の上余白は0なので、H3直後の表には見出し側で余白を確保する。
-   ノートのブロックラッパーと、READMEなどの直接描画の両方に対応する。 */
-.markdown-rendered h3:has(+ table, + .table-wrapper),
-.markdown-rendered .el-h3:has(+ .el-table) > h3 {
-  margin-bottom: var(--p-spacing) !important;
+.markdown-rendered h3 + :is(p, ul, ol, pre, blockquote, table, .table-wrapper, .tableWrapper, .callout, details),
+.markdown-rendered .el-h3 + div > :is(p, ul, ol, pre, blockquote, table, .table-wrapper, .callout, details) {
+  margin-top: var(--swak-h3-spacing) !important;
 }
 
 /* H3アイコン: 文字の上下中央にピッタリ配置される大型角丸スクエア（■） */
@@ -284,7 +309,7 @@ body {
 .markdown-source-view.mod-cm6 table th,
 .markdown-source-view.mod-cm6 table td {
   border: 1px solid #C5D3E0 !important;
-  padding: 8px 12px !important;
+  padding: var(--swak-table-cell-padding) !important;
 }
 .markdown-rendered table th,
 .markdown-source-view.mod-cm6 table th {
@@ -296,7 +321,7 @@ body {
 /* 先頭列は短いラベルが収まる幅を確保し、長い文章は通常どおり折り返す */
 .markdown-rendered table tr > :is(th, td):first-child,
 .markdown-source-view.mod-cm6 table tr > :is(th, td):first-child {
-  min-width: calc(5em + 24px);
+  min-width: calc(5em + 28px);
 }
 
 /* 外枠（上・下・左・右）の確実な表示保証 */
@@ -694,6 +719,11 @@ body {
 
 /* 8. コードブロック＆インラインコード視認性向上（ライト＆ダーク完全同期） */
 
+/* Obsidian標準の li > pre { margin: 0 } を文書の段落間隔へ戻す。 */
+.markdown-preview-view.markdown-rendered li > pre {
+  margin-block: var(--p-spacing);
+}
+
 /* 【ライトモード】：洗練されたスレートライト */
 .theme-light {
   --code-background: #F1F5F9 !important;
@@ -777,8 +807,8 @@ details {
   border: 1px solid #E2E8F0 !important;
   border-radius: 6px !important;
   background-color: #F8FAFC !important;
-  margin: 1em 0 !important;
-  padding: 0.6em 1em !important;
+  margin: var(--p-spacing, 1em) 0 !important;
+  padding: 0.8em 1em !important;
   transition: all 0.2s ease !important;
 }
 
@@ -823,7 +853,7 @@ details > *:not(summary) {
 /* 12. 引用線はグレーに統一し、親の線・子の線・本文の空きを揃える */
 body {
   --blockquote-border-color: var(--text-muted) !important;
-  --swak-quote-gap: 12px;
+  --swak-quote-gap: 14px;
   --swak-quote-step: calc(var(--swak-quote-gap) + var(--blockquote-border-thickness));
 }
 
@@ -905,7 +935,7 @@ body {
 
 /* 表・数式・コールアウトの後は通常の見出し前余白を使う。 */
 .markdown-source-view.mod-cm6.is-live-preview .cm-content > :is(.HyperMD-header, .hr, .cm-embed-block:not(.cm-table-widget, .math-block, .callout, :has(.callout))) + .cm-line:has(> br:only-child):has(+ .HyperMD-header) {
-  padding-block-start: 0;
+  padding-block-start: var(--swak-heading-adjacent-extra, 0px);
 }
 
 /* 冒頭のコールアウト直後にある最初のH1は、閲覧側と同じ通常の間隔にする。 */
@@ -921,20 +951,24 @@ body {
   padding-block-start: calc(var(--p-spacing) + var(--list-spacing)) !important;
 }
 
-/* H3の閲覧側の下余白 -10px と、後続段落の余白を合算する */
+/* H3直後は、空行の有無にかかわらず閲覧側と同じ小さな間隔にする。 */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .cm-line:has(> br:only-child):not(:has(+ .HyperMD-header)) {
+  line-height: var(--swak-h3-spacing) !important;
+}
+
 .markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .cm-line:not(.HyperMD-header):not(:has(> br:only-child)) {
-  padding-block-start: max(0px, calc(var(--p-spacing) - 10px));
+  padding-block-start: var(--swak-h3-spacing);
 }
 
 .markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .HyperMD-list-line {
-  padding-block-start: max(0px, calc(var(--p-spacing) - 10px + var(--list-spacing))) !important;
+  padding-block-start: calc(var(--swak-h3-spacing) + var(--list-spacing)) !important;
 }
 
-/* 折りたたみ枠自身の余白と、見出し・空行の余白を重複させない */
 .markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .cm-html-embed > details {
-  margin-block-start: max(0px, calc(1em - 10px)) !important;
+  margin-block-start: var(--swak-h3-spacing) !important;
 }
 
+/* 折りたたみ枠自身の余白と、後続の空行の余白を重複させない */
 .markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-html-embed:has(+ .cm-line > br:only-child) > details {
   margin-block-end: 0 !important;
 }
@@ -956,13 +990,17 @@ body {
   contain: none !important;
 }
 
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .cm-embed-block.cm-table-widget {
+  padding-block-start: var(--swak-h3-spacing);
+}
+
 /* セル余白を内側ラッパーに集約し、二重余白と不要な折り返しを解消する */
 .markdown-source-view.mod-cm6.is-live-preview .cm-table-widget :is(th, td) {
   padding: 0 !important;
 }
 
 .markdown-source-view.mod-cm6.is-live-preview .cm-table-widget .table-cell-wrapper {
-  padding: 8px 12px;
+  padding: var(--swak-table-cell-padding);
 }
 
 .markdown-source-view.mod-cm6.is-live-preview .cm-table-widget .table-wrapper {

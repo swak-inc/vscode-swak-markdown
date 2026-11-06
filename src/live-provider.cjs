@@ -20,12 +20,17 @@ function registerLiveEditor(context, vscode) {
       panels.set(document.uri.toString(), panel);
       let applying = false;
       let queue = Promise.resolve();
+      let saveEvents = 0;
       const send = () => panel.webview.postMessage({ type: 'document', text: document.getText(), version: document.version, dirty: document.isDirty });
+      const sendSaved = () => panel.webview.postMessage({ type: 'saved', dirty: document.isDirty });
       const changes = vscode.workspace.onDidChangeTextDocument(event => {
         if (event.document.uri.toString() === document.uri.toString() && event.contentChanges.length && !applying) send();
       });
       const saves = vscode.workspace.onDidSaveTextDocument(saved => {
-        if (saved.uri.toString() === document.uri.toString()) panel.webview.postMessage({ type: 'saved' });
+        if (saved.uri.toString() === document.uri.toString()) {
+          saveEvents++;
+          sendSaved();
+        }
       });
       const messages = panel.webview.onDidReceiveMessage(message => {
         queue = queue.then(async () => {
@@ -60,7 +65,20 @@ function registerLiveEditor(context, vscode) {
             return panel.webview.postMessage({ type: 'ack', version: document.version, dirty: document.isDirty });
           }
           if (message?.type === 'action') {
-            if (message.action === 'save' && !await document.save()) throw new Error('文書を保存できませんでした。編集内容は未保存のまま保持しています。');
+            if (message.action === 'save') {
+              // 保存済みの文書や重複した保存要求を、編集反映の失敗として扱わない。
+              if (!document.isDirty && !document.isUntitled) return sendSaved();
+              const beforeSave = saveEvents;
+              let saved = false;
+              // 開いているカスタムエディターを、IDEの標準保存処理へ渡す。
+              try { saved = await vscode.workspace.save(document.uri); } catch { /* 未保存の内容を維持し、再試行できる通知へ進む。 */ }
+              if (saved || (!document.isDirty && !document.isUntitled) || saveEvents > beforeSave) return sendSaved();
+              // 並行した保存の完了通知が後から届く場合がある。成功後に撤回できない
+              // エラートーストは出さず、保存通知で解除できるタブ内の状態として示す。
+              const message = '保存の完了を確認できていません。編集内容はこのタブに保持しています。この表示が残る場合は再度保存するか、「ソース」でIDEの保存エラーを確認してください。';
+              await panel.webview.postMessage({ type: 'saveUnconfirmed', message });
+              return;
+            }
             if (message.action === 'source') await open(document.uri, 'source');
           }
         }).catch(error => {

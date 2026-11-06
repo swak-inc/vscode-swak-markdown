@@ -22,7 +22,7 @@ async function main() {
       child.on('exit', code => code === 0 ? resolve() : reject(new Error('エディターテストの終了コード: ' + code)));
     });
     const result = JSON.parse(await fs.readFile(path.join(workspace, 'result.json'), 'utf8'));
-    if (result.passed !== 4) throw new Error('エディターテストの完了記録がありません');
+    if (result.passed !== 5) throw new Error('エディターテストの完了記録がありません');
     console.log('[swak][editor-test] 🏁 検証完了 - ' + JSON.stringify(result));
   } finally { await fs.rm(directory, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 }); }
 }

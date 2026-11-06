@@ -14,6 +14,7 @@ const api = acquireVsCodeApi();
 const status = document.getElementById('status');
 const notice = document.getElementById('notice');
 let view, model, version, baseText = '', currentText = '', sentText = null, nextAction = null, blocked = false, recovered = false;
+let saveUnconfirmed = false;
 let mode = 'live';
 const editorElement = document.getElementById('editor');
 const previewElement = document.getElementById('preview');
@@ -169,7 +170,23 @@ window.addEventListener('message', event => {
       sentText = null; version = message.version;
       status.textContent = message.dirty ? '未保存' : '保存済み';
       sendPending();
-    } else if (message?.type === 'saved') status.textContent = currentText === baseText ? '保存済み' : '未保存';
+    } else if (message?.type === 'saved') {
+      const dirty = message.dirty || sentText !== null || currentText !== baseText;
+      status.textContent = dirty ? '未保存' : '保存済み';
+      if (saveUnconfirmed && !blocked) {
+        saveUnconfirmed = false;
+        notice.hidden = true;
+        notice.textContent = '';
+      }
+    } else if (message?.type === 'saveUnconfirmed') {
+      // ディスク保存の失敗でも、同期済みの編集バッファとUndo履歴は利用できる。
+      saveUnconfirmed = true;
+      status.textContent = '未保存';
+      if (!blocked) {
+        notice.textContent = message.message;
+        notice.hidden = false;
+      }
+    }
     else if (message?.type === 'switch') action(message.mode);
     else if (message?.type === 'conflict') { recover(); fail('競合した編集内容は別タブへ退避しました。元ファイルを開き直して確認してください。'); }
     else if (message?.type === 'error') { recover(); fail(message.message); }

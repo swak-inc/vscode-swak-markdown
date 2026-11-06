@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const vscode = require('vscode');
+const { registerLiveEditor } = require('../../src/live-provider.cjs');
 
 async function waitFor(check) {
   const deadline = Date.now() + 10000;
@@ -41,10 +42,52 @@ exports.run = async () => {
   assert.equal(await vscode.workspace.applyEdit(edit), true);
   assert.equal(await document.save(), true);
   assert.equal(await fs.readFile(file, 'utf8'), source + '\n追加の本文。\n');
+  // Webviewの受信口だけを置き換え、拡張の保存ハンドラーと実IDE・実ファイルを結ぶ。
+  let provider, receive, disposePanel;
+  const sent = [], errors = [], subscriptions = [];
+  const disposable = { dispose() {} };
+  registerLiveEditor({ extensionUri: extension.extensionUri, subscriptions }, {
+    Uri: vscode.Uri, ViewColumn: vscode.ViewColumn, Range: vscode.Range,
+    WorkspaceEdit: vscode.WorkspaceEdit, workspace: vscode.workspace,
+    window: {
+      tabGroups: vscode.window.tabGroups,
+      showTextDocument: vscode.window.showTextDocument,
+      showWarningMessage: vscode.window.showWarningMessage,
+      registerCustomEditorProvider(type, value) { provider = value; return disposable; },
+      showErrorMessage(message) { errors.push(message); }
+    },
+    commands: { executeCommand: vscode.commands.executeCommand, registerCommand() { return disposable; } }
+  });
+  await provider.resolveCustomTextEditor(document, {
+    webview: {
+      cspSource: 'https://swak.test', asWebviewUri: value => value,
+      postMessage: async value => { sent.push(value); return true; },
+      onDidReceiveMessage(handler) { receive = handler; return disposable; }
+    },
+    onDidDispose(handler) { disposePanel = handler; }
+  });
+  try {
+    const text = document.getText() + '\nライブプレビュー経由の保存。\n';
+    receive({ type: 'edit', text, version: document.version });
+    await waitFor(() => sent.some(message => message.type === 'ack'));
+    receive({ type: 'action', action: 'save' });
+    await waitFor(() => sent.some(message => message.type === 'saved'));
+    assert.equal(await fs.readFile(file, 'utf8'), text);
+    assert.equal(document.isDirty, false);
+    sent.length = 0;
+    receive({ type: 'action', action: 'save' });
+    await waitFor(() => sent.some(message => message.type === 'saved'));
+    assert.equal(sent.some(message => ['error', 'saveUnconfirmed'].includes(message.type)), false);
+    assert.deepEqual(errors, []);
+    console.log('[swak][editor-test] ライブプレビューの保存ハンドラーによる保存・再保存');
+  } finally {
+    disposePanel();
+    for (const subscription of subscriptions) subscription.dispose();
+  }
   await vscode.commands.executeCommand('vscode.openWith', uri, 'default');
   await waitFor(() => vscode.window.activeTextEditor?.document.uri.toString() === uri.toString());
   assert.deepEqual(vscode.workspace.getConfiguration('workbench').get('editorAssociations'), settings);
   console.log('[swak][editor-test] ✅ 文書の保存と標準エディターへの切替・既定設定の維持');
   await vscode.commands.executeCommand('workbench.action.closeAllEditors');
-  await fs.writeFile(path.join(process.env.SWAK_EDITOR_TEST_DIR, 'result.json'), JSON.stringify({ editor: vscode.version, passed: 4 }));
+  await fs.writeFile(path.join(process.env.SWAK_EDITOR_TEST_DIR, 'result.json'), JSON.stringify({ editor: vscode.version, passed: 5 }));
 };

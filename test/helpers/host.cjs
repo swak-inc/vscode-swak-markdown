@@ -2,7 +2,7 @@ const { registerLiveEditor } = require('../../src/live-provider.cjs');
 
 async function createHost(text = '元の本文') {
   const uri = path => ({ scheme: 'file', toString: () => path });
-  const sent = [], recovered = [], opened = [];
+  const sent = [], recovered = [], opened = [], errors = [], saveRequests = [];
   const commands = new Map();
   let change, save, receive, provider;
   const disposable = { dispose() {} };
@@ -17,6 +17,7 @@ async function createHost(text = '元の本文') {
     Range: class { constructor(from, to) { this.from = from; this.to = to; } },
     WorkspaceEdit: class { replace(uri, range, text) { Object.assign(this, { uri, range, text }); } },
     workspace: {
+      async save(uri) { saveRequests.push(uri); return await document.save() ? uri : undefined; },
       onDidChangeTextDocument(fn) { change = fn; return disposable; },
       onDidSaveTextDocument(fn) { save = fn; return disposable; },
       async applyEdit(edit) {
@@ -29,7 +30,7 @@ async function createHost(text = '元の本文') {
     window: {
       tabGroups: { activeTabGroup: { activeTab: { input: { uri: document.uri } } } },
       registerCustomEditorProvider(type, value) { provider = value; return disposable; },
-      showTextDocument: async () => {}, showWarningMessage() {}, showErrorMessage() {}
+      showTextDocument: async () => {}, showWarningMessage() {}, showErrorMessage(message) { errors.push(message); }
     },
     commands: { registerCommand(name, handler) { commands.set(name, handler); return disposable; }, executeCommand: async (...args) => opened.push(args) }
   };
@@ -41,7 +42,7 @@ async function createHost(text = '元の本文') {
   registerLiveEditor({ extensionUri: uri('/extension'), subscriptions: [] }, vscode);
   await provider.resolveCustomTextEditor(document, panel);
   const message = async value => { receive(value); await new Promise(resolve => setImmediate(resolve)); };
-  return { document, sent, recovered, opened, message, change, vscode, panel, commands };
+  return { document, sent, recovered, opened, errors, saveRequests, message, change, vscode, panel, commands };
 }
 
 module.exports = { createHost };

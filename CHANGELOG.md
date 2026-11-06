@@ -1,5 +1,24 @@
 # Changelog / 変更履歴
 
+## 1.1.5
+
+- Restore compact spacing after H3 headings and add 6px before H2 headings in live, reading, and built-in previews, matching the Swak Obsidian theme. / ライブ・閲覧・標準プレビューでH3直後をコンパクトに戻し、H2の前を6px広げてObsidianテーマと揃えました。
+
+## 1.1.4
+
+- Share more comfortable body, paragraph, list, heading, table, callout, and property spacing with the Swak Obsidian theme. / 本文・段落・リスト・見出し・表・コールアウト・プロパティの余白を少し広げ、Obsidianテーマと共通化しました。
+- Use normal spacing after H3 headings in live and reading views. / ライブ・閲覧表示でH3直後を通常の段落間隔へ戻しました。
+
+## 1.1.3
+
+- Save through the IDE's open-editor workflow and clear temporary in-tab notices when a delayed save confirmation arrives. Avoid leaving a false error notification after a successful save. / IDEの標準保存処理を使い、遅れて保存完了が通知された場合もタブ内の案内を解除します。保存成功後に誤ったエラー通知が残る問題を修正しました。
+- Keep later edits marked as unsaved when an earlier save completes, and preserve editing and retry after unsuccessful saves. / 前の保存が完了しても、その後の追記は未保存として保持します。保存できなかった場合も編集と再保存を続けられます。
+
+## 1.1.2
+
+- Keep live preview editable after saving by checking save notifications and remaining unsaved changes, including repeated saves. / 保存通知と未保存状態を確認し、保存済みの再保存でもライブプレビューが編集不能にならないよう修正しました。
+- Keep disk-save failures in the current tab so editing, undo, and retry remain available; recover separate copies only for synchronization failures or conflicting edits. / ディスク保存に失敗しても同じタブで編集・Undo・再保存できるようにし、別タブへの退避は同期失敗や編集競合時に限定しました。
+
 ## 1.1.1
 
 - Match heading spacing after callouts to paragraphs and tables in live, reading, and built-in previews, while keeping the opening H1 and adjacent headings compact. / ライブ・閲覧・標準プレビューでコールアウト後の見出し余白を本文・テーブル後と統一し、冒頭のH1と見出しが連続する箇所はコンパクトに保ちます。
