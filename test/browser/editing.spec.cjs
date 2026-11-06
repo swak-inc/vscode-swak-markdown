@@ -83,6 +83,61 @@ test('保存成功後にAPIがfalseを返しても編集を続けられ、再保
   expect(errors).toEqual([]);
 });
 
+for (const trigger of ['button', 'shortcut']) {
+  test(`${trigger}で保存後、遅れて完了通知が届けば通知を解除し、続けた入力は未保存として保つ`, async ({ page }) => {
+    const { host, errors } = await setup(page);
+    const completeSave = host.document.save.bind(host.document);
+    host.document.save = async () => false;
+    const paragraph = page.locator('.ProseMirror > p').first();
+    await paragraph.click();
+    await page.keyboard.press('End');
+    await page.keyboard.insertText('保存対象');
+    if (trigger === 'button') await page.getByRole('button', { name: '保存', exact: true }).click();
+    else await page.keyboard.press(process.platform === 'darwin' ? 'Meta+s' : 'Control+s');
+    await expect(page.locator('#notice')).toBeVisible();
+    await expect(page.locator('#status')).toHaveText('未保存');
+    expect(host.errors).toEqual([]);
+    // 保存の返答とは別に届く完了通知を再現する。
+    await completeSave();
+    await expect(page.locator('#notice')).toBeHidden();
+    await expect(page.locator('#status')).toHaveText('保存済み');
+    await paragraph.click();
+    await page.keyboard.press('End');
+    await page.keyboard.insertText('保存後の追記');
+    await expect.poll(() => host.document.text).toContain('保存対象保存後の追記');
+    await expect(page.locator('#status')).toHaveText('未保存');
+    await expect(page.locator('#notice')).toBeHidden();
+    await expect(page.locator('.ProseMirror')).toHaveAttribute('contenteditable', 'true');
+    expect(host.errors).toEqual([]);
+    expect(host.recovered).toEqual([]);
+    expect(errors).toEqual([]);
+  });
+}
+
+test('保存完了時に次の編集が未反映でも、前の保存通知は解除する', async ({ page }) => {
+  const { host } = await setup(page);
+  host.document.save = async () => false;
+  await page.locator('.ProseMirror > p').first().click();
+  await page.keyboard.insertText('保存対象');
+  await page.getByRole('button', { name: '保存', exact: true }).click();
+  await expect(page.locator('#notice')).toBeVisible();
+  const applyEdit = host.vscode.workspace.applyEdit;
+  let releaseEdit;
+  host.vscode.workspace.applyEdit = async edit => {
+    await new Promise(resolve => { releaseEdit = resolve; });
+    return applyEdit(edit);
+  };
+  await page.locator('.ProseMirror > p').first().click();
+  await page.keyboard.insertText('後続の未反映入力');
+  await expect.poll(() => typeof releaseEdit).toBe('function');
+  await host.panel.webview.postMessage({ type: 'saved', dirty: false });
+  await expect(page.locator('#notice')).toBeHidden();
+  await expect(page.locator('#status')).toHaveText('未保存');
+  releaseEdit();
+  await expect.poll(() => host.document.text).toContain('後続の未反映入力');
+  expect(host.errors).toEqual([]);
+});
+
 test('見出し・表・コールアウト・装飾内の文字を入力し、型と装飾を維持する', async ({ page }) => {
   const { host, errors } = await setup(page);
   for (const selector of ['.ProseMirror > h1', '.ProseMirror td p', '.ProseMirror .callout-content > p', '.ProseMirror mark strong', '.ProseMirror s']) {

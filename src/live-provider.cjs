@@ -70,11 +70,13 @@ function registerLiveEditor(context, vscode) {
               if (!document.isDirty && !document.isUntitled) return sendSaved();
               const beforeSave = saveEvents;
               let saved = false;
-              try { saved = await document.save(); } catch { /* 未保存の内容を維持し、再試行できる通知へ進む。 */ }
+              // 開いているカスタムエディターを、IDEの標準保存処理へ渡す。
+              try { saved = await vscode.workspace.save(document.uri); } catch { /* 未保存の内容を維持し、再試行できる通知へ進む。 */ }
               if (saved || (!document.isDirty && !document.isUntitled) || saveEvents > beforeSave) return sendSaved();
-              const message = '保存を完了できませんでした。編集内容はこのタブに保持しています。再度保存するか、「ソース」でIDEの保存エラーを確認してください。';
-              await panel.webview.postMessage({ type: 'saveFailed', message });
-              vscode.window.showErrorMessage(`Swak: ${message}`);
+              // 並行した保存の完了通知が後から届く場合がある。成功後に撤回できない
+              // エラートーストは出さず、保存通知で解除できるタブ内の状態として示す。
+              const message = '保存の完了を確認できていません。編集内容はこのタブに保持しています。この表示が残る場合は再度保存するか、「ソース」でIDEの保存エラーを確認してください。';
+              await panel.webview.postMessage({ type: 'saveUnconfirmed', message });
               return;
             }
             if (message.action === 'source') await open(document.uri, 'source');

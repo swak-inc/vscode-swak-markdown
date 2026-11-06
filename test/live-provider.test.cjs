@@ -54,7 +54,7 @@ test('保存通知後にAPIがfalseを返しても、実際に保存された状
   await host.message({ type: 'action', action: 'save' });
   assert.equal(host.document.isDirty, false);
   assert.deepEqual(host.sent.at(-1), { type: 'saved', dirty: false });
-  assert.equal(host.sent.some(message => ['error', 'saveFailed'].includes(message.type)), false);
+  assert.equal(host.sent.some(message => ['error', 'saveUnconfirmed'].includes(message.type)), false);
 });
 
 test('保存通知後に新しい変更が残っていれば、APIのfalseを致命的エラーにせず未保存を表示する', async () => {
@@ -63,7 +63,7 @@ test('保存通知後に新しい変更が残っていれば、APIのfalseを致
   host.document.save = async () => { await save(); host.document.isDirty = true; return false; };
   await host.message({ type: 'edit', text: '編集を続ける本文', version: 1 });
   await host.message({ type: 'action', action: 'save' });
-  assert.equal(host.sent.some(message => ['error', 'saveFailed'].includes(message.type)), false);
+  assert.equal(host.sent.some(message => ['error', 'saveUnconfirmed'].includes(message.type)), false);
   assert.equal(host.document.isDirty, true);
   assert.deepEqual(host.sent.at(-1), { type: 'saved', dirty: true });
 });
@@ -77,9 +77,26 @@ for (const failure of ['false', 'throw']) {
     };
     await host.message({ type: 'edit', text: '維持する本文', version: 1 });
     await host.message({ type: 'action', action: 'save' });
-    assert.equal(host.sent.at(-1).type, 'saveFailed');
+    assert.equal(host.sent.at(-1).type, 'saveUnconfirmed');
     assert.equal(host.document.text, '維持する本文');
     assert.equal(host.document.isDirty, true);
     assert.equal(host.sent.some(message => message.type === 'error'), false);
+    assert.deepEqual(host.errors, []);
   });
 }
+
+test('保存APIの応答より遅れて完了通知が届いても、撤回できないエラー通知を残さない', async () => {
+  const host = await createHost();
+  const completeSave = host.document.save.bind(host.document);
+  host.document.save = async () => false;
+  await host.message({ type: 'edit', text: '遅れて保存される本文', version: 1 });
+  await host.message({ type: 'action', action: 'save' });
+  assert.equal(host.sent.at(-1).type, 'saveUnconfirmed');
+  assert.equal(host.document.isDirty, true);
+  assert.deepEqual(host.errors, []);
+  assert.deepEqual(host.saveRequests, [host.document.uri]);
+  await completeSave();
+  assert.deepEqual(host.sent.at(-1), { type: 'saved', dirty: false });
+  assert.deepEqual(host.errors, []);
+  assert.deepEqual(host.recovered, []);
+});

@@ -1,5 +1,10 @@
 # Changelog / 変更履歴
 
+## 1.1.3
+
+- Save through the IDE's open-editor workflow and clear temporary in-tab notices when a delayed save confirmation arrives. Avoid leaving a false error notification after a successful save. / IDEの標準保存処理を使い、遅れて保存完了が通知された場合もタブ内の案内を解除します。保存成功後に誤ったエラー通知が残る問題を修正しました。
+- Keep later edits marked as unsaved when an earlier save completes, and preserve editing and retry after unsuccessful saves. / 前の保存が完了しても、その後の追記は未保存として保持します。保存できなかった場合も編集と再保存を続けられます。
+
 ## 1.1.2
 
 - Keep live preview editable after saving by checking save notifications and remaining unsaved changes, including repeated saves. / 保存通知と未保存状態を確認し、保存済みの再保存でもライブプレビューが編集不能にならないよう修正しました。

@@ -14,7 +14,7 @@ const api = acquireVsCodeApi();
 const status = document.getElementById('status');
 const notice = document.getElementById('notice');
 let view, model, version, baseText = '', currentText = '', sentText = null, nextAction = null, blocked = false, recovered = false;
-let saveFailed = false;
+let saveUnconfirmed = false;
 let mode = 'live';
 const editorElement = document.getElementById('editor');
 const previewElement = document.getElementById('preview');
@@ -173,15 +173,15 @@ window.addEventListener('message', event => {
     } else if (message?.type === 'saved') {
       const dirty = message.dirty || sentText !== null || currentText !== baseText;
       status.textContent = dirty ? '未保存' : '保存済み';
-      if (!dirty && saveFailed && !blocked) {
-        saveFailed = false;
+      if (saveUnconfirmed && !blocked) {
+        saveUnconfirmed = false;
         notice.hidden = true;
         notice.textContent = '';
       }
-    } else if (message?.type === 'saveFailed') {
+    } else if (message?.type === 'saveUnconfirmed') {
       // ディスク保存の失敗でも、同期済みの編集バッファとUndo履歴は利用できる。
-      saveFailed = true;
-      status.textContent = '未保存（保存失敗）';
+      saveUnconfirmed = true;
+      status.textContent = '未保存';
       if (!blocked) {
         notice.textContent = message.message;
         notice.hidden = false;
