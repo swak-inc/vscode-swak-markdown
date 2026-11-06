@@ -1,5 +1,10 @@
 # Changelog / 変更履歴
 
+## 1.1.4
+
+- Share more comfortable body, paragraph, list, heading, table, callout, and property spacing with the Swak Obsidian theme. / 本文・段落・リスト・見出し・表・コールアウト・プロパティの余白を少し広げ、Obsidianテーマと共通化しました。
+- Use normal spacing after H3 headings in live and reading views. / ライブ・閲覧表示でH3直後を通常の段落間隔へ戻しました。
+
 ## 1.1.3
 
 - Save through the IDE's open-editor workflow and clear temporary in-tab notices when a delayed save confirmation arrives. Avoid leaving a false error notification after a successful save. / IDEの標準保存処理を使い、遅れて保存完了が通知された場合もタブ内の案内を解除します。保存成功後に誤ったエラー通知が残る問題を修正しました。

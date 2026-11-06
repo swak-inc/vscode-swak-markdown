@@ -2,6 +2,18 @@
    Swak Official Theme - Reading & Live Preview
    ========================================================================== */
 
+/* 文書内の行間・余白を共通化。アプリのサイドバーやツールバーには適用しない。 */
+.markdown-rendered,
+.markdown-source-view.mod-cm6 {
+  --p-spacing: 1.2rem;
+  --heading-spacing: calc(var(--p-spacing) * 2.5);
+  --line-height-normal: 1.6;
+  --list-spacing: 0.125em;
+  --table-line-height: 1.5;
+  --callout-padding: 16px 16px 16px 24px;
+  --swak-table-cell-padding: 10px 14px;
+}
+
 /* 0. ファイル名タイトル（ノート最上部のファイル名・タブ・サイドバー）の文字色 */
 .inline-title,
 .markdown-rendered .inline-title,
@@ -44,9 +56,9 @@
   --metadata-border-color: #D5DFEA;
   --metadata-border-radius: 6px;
   --metadata-border-width: 1px;
-  --metadata-padding: 12px 14px;
+  --metadata-padding: 14px 16px;
   --metadata-gap: 0;
-  --metadata-property-padding: 6px 0;
+  --metadata-property-padding: 7px 0;
   --metadata-label-width: 10em;
   --metadata-label-font-size: var(--font-text-size, 1rem);
   --metadata-label-font-weight: 600;
@@ -132,7 +144,7 @@ body {
   background-color: #0B3D63 !important;
   color: #FFFFFF !important;
   font-weight: 700 !important;
-  padding: 6px 14px !important;
+  padding: 8px 16px !important;
   border-radius: 3px !important;
   letter-spacing: 0.02em !important;
   border: none !important;
@@ -187,7 +199,7 @@ body {
   box-shadow: none !important;
   color: #0B3D63 !important;
   font-weight: 700 !important;
-  padding: 5px 12px !important;
+  padding: 7px 14px !important;
   border: none !important;
   border-radius: 3px !important;
   letter-spacing: 0.01em !important;
@@ -219,16 +231,9 @@ body {
   padding-left: 0 !important;
 }
 
-/* ビューモード: 直後要素のデフォルト余白を相殺し自然な距離感に */
+/* H3直後にも通常の段落間隔を確保し、本文・リスト・表を読み分ける。 */
 .markdown-rendered h3 {
   padding-bottom: 0 !important;
-  margin-bottom: -10px !important;
-}
-
-/* 表の上余白は0なので、H3直後の表には見出し側で余白を確保する。
-   ノートのブロックラッパーと、READMEなどの直接描画の両方に対応する。 */
-.markdown-rendered h3:has(+ table, + .table-wrapper),
-.markdown-rendered .el-h3:has(+ .el-table) > h3 {
   margin-bottom: var(--p-spacing) !important;
 }
 
@@ -284,7 +289,7 @@ body {
 .markdown-source-view.mod-cm6 table th,
 .markdown-source-view.mod-cm6 table td {
   border: 1px solid #C5D3E0 !important;
-  padding: 8px 12px !important;
+  padding: var(--swak-table-cell-padding) !important;
 }
 .markdown-rendered table th,
 .markdown-source-view.mod-cm6 table th {
@@ -296,7 +301,7 @@ body {
 /* 先頭列は短いラベルが収まる幅を確保し、長い文章は通常どおり折り返す */
 .markdown-rendered table tr > :is(th, td):first-child,
 .markdown-source-view.mod-cm6 table tr > :is(th, td):first-child {
-  min-width: calc(5em + 24px);
+  min-width: calc(5em + 28px);
 }
 
 /* 外枠（上・下・左・右）の確実な表示保証 */
@@ -777,8 +782,8 @@ details {
   border: 1px solid #E2E8F0 !important;
   border-radius: 6px !important;
   background-color: #F8FAFC !important;
-  margin: 1em 0 !important;
-  padding: 0.6em 1em !important;
+  margin: var(--p-spacing, 1em) 0 !important;
+  padding: 0.8em 1em !important;
   transition: all 0.2s ease !important;
 }
 
@@ -823,7 +828,7 @@ details > *:not(summary) {
 /* 12. 引用線はグレーに統一し、親の線・子の線・本文の空きを揃える */
 body {
   --blockquote-border-color: var(--text-muted) !important;
-  --swak-quote-gap: 12px;
+  --swak-quote-gap: 14px;
   --swak-quote-step: calc(var(--swak-quote-gap) + var(--blockquote-border-thickness));
 }
 
@@ -921,20 +926,7 @@ body {
   padding-block-start: calc(var(--p-spacing) + var(--list-spacing)) !important;
 }
 
-/* H3の閲覧側の下余白 -10px と、後続段落の余白を合算する */
-.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .cm-line:not(.HyperMD-header):not(:has(> br:only-child)) {
-  padding-block-start: max(0px, calc(var(--p-spacing) - 10px));
-}
-
-.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .HyperMD-list-line {
-  padding-block-start: max(0px, calc(var(--p-spacing) - 10px + var(--list-spacing))) !important;
-}
-
-/* 折りたたみ枠自身の余白と、見出し・空行の余白を重複させない */
-.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .cm-html-embed > details {
-  margin-block-start: max(0px, calc(1em - 10px)) !important;
-}
-
+/* 折りたたみ枠自身の余白と、後続の空行の余白を重複させない */
 .markdown-source-view.mod-cm6.is-live-preview .cm-content > .cm-html-embed:has(+ .cm-line > br:only-child) > details {
   margin-block-end: 0 !important;
 }
@@ -962,7 +954,7 @@ body {
 }
 
 .markdown-source-view.mod-cm6.is-live-preview .cm-table-widget .table-cell-wrapper {
-  padding: 8px 12px;
+  padding: var(--swak-table-cell-padding);
 }
 
 .markdown-source-view.mod-cm6.is-live-preview .cm-table-widget .table-wrapper {
