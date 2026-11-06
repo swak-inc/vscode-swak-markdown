@@ -24,6 +24,65 @@ test('ビルド済み画面で英字・日本語・改行を入力して保存�
   expect(host.recovered).toEqual([]);
 });
 
+for (const failure of ['false', 'throw']) {
+  test(`保存が${failure}で失敗しても同じタブで編集を続け、再保存できる`, async ({ page }) => {
+    const { host, errors } = await setup(page);
+    const save = host.document.save.bind(host.document);
+    host.document.save = async () => {
+      if (failure === 'throw') throw new Error('保存先に書き込めません');
+      return false;
+    };
+    const paragraph = page.locator('.ProseMirror > p').first();
+    await paragraph.click();
+    await page.keyboard.press('End');
+    await page.keyboard.insertText('保存前の追記');
+    await expect.poll(() => host.document.text).toContain('保存前の追記');
+    await page.getByRole('button', { name: '保存', exact: true }).click();
+    await expect(page.locator('#notice')).toBeVisible();
+    await expect(page.locator('.ProseMirror')).toHaveAttribute('contenteditable', 'true');
+    await expect(page.locator('#status')).toContainText('未保存');
+    expect(host.document.isDirty).toBe(true);
+    expect(host.recovered).toEqual([]);
+    await paragraph.click();
+    await page.keyboard.press('End');
+    await page.keyboard.insertText('失敗後の追記');
+    await expect.poll(() => host.document.text).toContain('保存前の追記失敗後の追記');
+    host.document.save = save;
+    await page.getByRole('button', { name: '保存', exact: true }).click();
+    await expect(page.locator('#status')).toHaveText('保存済み');
+    await expect(page.locator('#notice')).toBeHidden();
+    expect(host.document.isDirty).toBe(false);
+    expect(host.recovered).toEqual([]);
+    expect(errors).toEqual([]);
+  });
+}
+
+test('保存成功後にAPIがfalseを返しても編集を続けられ、再保存とUndoが動く', async ({ page }) => {
+  const { host, errors } = await setup(page);
+  const save = host.document.save.bind(host.document);
+  host.document.save = async () => { await save(); return false; };
+  const paragraph = page.locator('.ProseMirror > p').first();
+  await paragraph.click();
+  await page.keyboard.press('End');
+  await page.keyboard.insertText('保存成功');
+  await page.getByRole('button', { name: '保存', exact: true }).click();
+  await expect(page.locator('#status')).toHaveText('保存済み');
+  await expect(page.locator('.ProseMirror')).toHaveAttribute('contenteditable', 'true');
+  await expect(page.locator('#notice')).toBeHidden();
+  expect(host.document.isDirty).toBe(false);
+  expect(host.recovered).toEqual([]);
+  await page.getByRole('button', { name: '保存', exact: true }).click();
+  await paragraph.click();
+  await page.keyboard.press('End');
+  await page.keyboard.insertText('続けて入力');
+  await expect.poll(() => host.document.text).toContain('保存成功続けて入力');
+  await page.locator('[data-command="undo"]').click();
+  await expect.poll(() => host.document.text).not.toContain('続けて入力');
+  await expect(page.locator('.ProseMirror')).toHaveAttribute('contenteditable', 'true');
+  expect(host.recovered).toEqual([]);
+  expect(errors).toEqual([]);
+});
+
 test('見出し・表・コールアウト・装飾内の文字を入力し、型と装飾を維持する', async ({ page }) => {
   const { host, errors } = await setup(page);
   for (const selector of ['.ProseMirror > h1', '.ProseMirror td p', '.ProseMirror .callout-content > p', '.ProseMirror mark strong', '.ProseMirror s']) {

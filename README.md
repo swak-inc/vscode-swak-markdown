@@ -299,6 +299,8 @@ Set the associations above to `default`, or remove the entries, to use the regul
 
 Files remain ordinary Markdown. Edited blocks may be normalized; untouched blocks retain their original syntax and blank lines. If another editor changes the same file during an edit, conflicting input is recovered in a separate unsaved tab.
 
+If saving to disk fails, your changes remain editable in the same tab. Retry saving, or use Source to check the IDE's save error. The status stays unsaved until saving succeeds.
+
 This is a separate editor, not the Obsidian editing engine. It does not change the IDE's overall theme or its source editor. [Development and verification](DEVELOPMENT.md).
 
 **日本語**
@@ -314,6 +316,8 @@ This is a separate editor, not the Obsidian editing engine. It does not change t
 | Mermaid | コードとして編集 | コード表示・図への変換なし |
 
 ファイルは通常のMarkdownのままです。変更したブロックの記法は整形される場合がありますが、未変更のブロックは元の記法と空行を保ちます。同時編集が競合した場合は、入力を未保存の別タブに退避します。
+
+ディスクへの保存に失敗しても、同じタブで編集を続けられます。再度保存するか、ソース表示でIDEの保存エラーを確認してください。保存が成功するまでは未保存として表示します。
 
 Obsidianとは別の編集エンジンです。IDE全体のテーマやソースエディターの配色は変更しません。[開発と検証](DEVELOPMENT.md)。
 
