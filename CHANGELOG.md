@@ -1,5 +1,9 @@
 # Changelog / 変更履歴
 
+## 1.1.5
+
+- Restore compact spacing after H3 headings and add 6px before H2 headings in live, reading, and built-in previews, matching the Swak Obsidian theme. / ライブ・閲覧・標準プレビューでH3直後をコンパクトに戻し、H2の前を6px広げてObsidianテーマと揃えました。
+
 ## 1.1.4
 
 - Share more comfortable body, paragraph, list, heading, table, callout, and property spacing with the Swak Obsidian theme. / 本文・段落・リスト・見出し・表・コールアウト・プロパティの余白を少し広げ、Obsidianテーマと共通化しました。
