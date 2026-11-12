@@ -162,6 +162,20 @@ body {
   color: rgba(255, 255, 255, 0.45) !important;
 }
 
+/* 目次などからのジャンプ直後の強調表示（is-flashing）は、標準では乗算で重ねるため、
+   濃紺の帯の上だと白い文字まで沈んで読めなくなる。見出しの中は、どの階層も同じ不透明なマーカーにそろえる。 */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header .is-flashing,
+.markdown-rendered :is(h1, h2, h3, h4, h5, h6) .is-flashing {
+  mix-blend-mode: normal !important;
+  background-color: #FFD54A !important;
+  color: #0B3D63 !important;
+}
+
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header .is-flashing *,
+.markdown-rendered :is(h1, h2, h3, h4, h5, h6) .is-flashing * {
+  color: #0B3D63 !important;
+}
+
 /* PDFでは本文のH1と、Obsidianが直下に追加するファイル名タイトルを区別する。 */
 @media print {
   /* 自然改ページを含め、ノートの外側余白を各ページに繰り返す。 */
@@ -246,14 +260,15 @@ body {
   padding-left: 0 !important;
 }
 
-/* H3と後続の本文を近づける。負のmarginを使わず、表の重なりも防ぐ。 */
-.markdown-rendered h3 {
+/* H3・H4と後続の本文を近づける。負のmarginを使わず、表の重なりも防ぐ。
+   閲覧時の el-h3 と、クラスを持たないPDFのブロックラッパーの両方に効くよう :has で判定する。 */
+.markdown-rendered :is(h3, h4) {
   padding-bottom: 0 !important;
   margin-bottom: var(--swak-h3-spacing) !important;
 }
 
-.markdown-rendered h3 + :is(p, ul, ol, pre, blockquote, table, .table-wrapper, .tableWrapper, .callout, details),
-.markdown-rendered .el-h3 + div > :is(p, ul, ol, pre, blockquote, table, .table-wrapper, .callout, details) {
+.markdown-rendered :is(h3, h4) + :is(p, ul, ol, pre, blockquote, table, .table-wrapper, .tableWrapper, .callout, details),
+.markdown-rendered div:has(> :is(h3, h4)) + div > :is(p, ul, ol, pre, blockquote, table, .table-wrapper, .tableWrapper, .callout, details) {
   margin-top: var(--swak-h3-spacing) !important;
 }
 
@@ -293,6 +308,12 @@ body {
 .markdown-source-view.mod-cm6 .cm-embed-block.cm-table-widget {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
+}
+
+/* 表が続く箇所も、段落と同じ間隔で区切る。 */
+.markdown-rendered :is(table, .table-wrapper, .tableWrapper) + :is(table, .table-wrapper, .tableWrapper),
+.markdown-rendered div:has(> :is(table, .table-wrapper, .tableWrapper)) + div > :is(table, .table-wrapper, .tableWrapper) {
+  margin-top: var(--p-spacing) !important;
 }
 .markdown-rendered table,
 .markdown-source-view.mod-cm6 table {
@@ -951,20 +972,20 @@ body {
   padding-block-start: calc(var(--p-spacing) + var(--list-spacing)) !important;
 }
 
-/* H3直後は、空行の有無にかかわらず閲覧側と同じ小さな間隔にする。 */
-.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .cm-line:has(> br:only-child):not(:has(+ .HyperMD-header)) {
+/* H3・H4直後は、空行の有無にかかわらず閲覧側と同じ小さな間隔にする。 */
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > :is(.HyperMD-header-3, .HyperMD-header-4) + .cm-line:has(> br:only-child):not(:has(+ .HyperMD-header)) {
   line-height: var(--swak-h3-spacing) !important;
 }
 
-.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .cm-line:not(.HyperMD-header):not(:has(> br:only-child)) {
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > :is(.HyperMD-header-3, .HyperMD-header-4) + .cm-line:not(.HyperMD-header):not(:has(> br:only-child)) {
   padding-block-start: var(--swak-h3-spacing);
 }
 
-.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .HyperMD-list-line {
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > :is(.HyperMD-header-3, .HyperMD-header-4) + .HyperMD-list-line {
   padding-block-start: calc(var(--swak-h3-spacing) + var(--list-spacing)) !important;
 }
 
-.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .cm-html-embed > details {
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > :is(.HyperMD-header-3, .HyperMD-header-4) + .cm-html-embed > details {
   margin-block-start: var(--swak-h3-spacing) !important;
 }
 
@@ -990,7 +1011,7 @@ body {
   contain: none !important;
 }
 
-.markdown-source-view.mod-cm6.is-live-preview .cm-content > .HyperMD-header-3 + .cm-embed-block.cm-table-widget {
+.markdown-source-view.mod-cm6.is-live-preview .cm-content > :is(.HyperMD-header-3, .HyperMD-header-4) + .cm-embed-block.cm-table-widget {
   padding-block-start: var(--swak-h3-spacing);
 }
 
