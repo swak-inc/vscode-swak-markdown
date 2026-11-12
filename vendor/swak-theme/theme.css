@@ -162,6 +162,20 @@ body {
   color: rgba(255, 255, 255, 0.45) !important;
 }
 
+/* 目次などからのジャンプ直後の強調表示（is-flashing）は、標準では乗算で重ねるため、
+   濃紺の帯の上だと白い文字まで沈んで読めなくなる。見出しの中は、どの階層も同じ不透明なマーカーにそろえる。 */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header .is-flashing,
+.markdown-rendered :is(h1, h2, h3, h4, h5, h6) .is-flashing {
+  mix-blend-mode: normal !important;
+  background-color: #FFD54A !important;
+  color: #0B3D63 !important;
+}
+
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header .is-flashing *,
+.markdown-rendered :is(h1, h2, h3, h4, h5, h6) .is-flashing * {
+  color: #0B3D63 !important;
+}
+
 /* PDFでは本文のH1と、Obsidianが直下に追加するファイル名タイトルを区別する。 */
 @media print {
   /* 自然改ページを含め、ノートの外側余白を各ページに繰り返す。 */

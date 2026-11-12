@@ -3,6 +3,7 @@
 ## 1.1.6
 
 - Separate consecutive tables with paragraph spacing, and use the compact H3 spacing after H4 headings, matching the Swak Obsidian theme 1.1.5. / 表が続く箇所に段落と同じ余白を入れ、H4直後もH3と同じコンパクトな余白にしました（Obsidianテーマ1.1.5と共通）。
+- Use a solid yellow marker with navy text when a heading is highlighted after a jump, matching the Swak Obsidian theme 1.1.5. / 見出しへ移動した直後の強調表示を、全階層で黄色のマーカーと濃紺の文字にそろえました（Obsidianテーマ1.1.5と共通）。
 
 ## 1.1.5
 
